@@ -1,0 +1,13 @@
+title: EIGSEP Technical Memos
+theme: minima
+plugins: [jekyll‐feed]
+defaults:
+  - scope:
+      path: "memos"
+      type: "static_file"
+    values:
+      layout: nil
+
+# Optional: enable permalinks
+permalink: /:path/
+
