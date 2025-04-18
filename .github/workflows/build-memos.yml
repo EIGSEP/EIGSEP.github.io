@@ -3,6 +3,10 @@ name: Build and Publish Memos
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'memos/**'
+      - 'notebooks/**'
+      - '.github/workflows/build‑memos.yml'
 
 jobs:
   build:
@@ -13,33 +17,40 @@ jobs:
       with:
         fetch-depth: 0
 
-    # Install a basic TeXlive environment
     - name: Install TeX Live
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-latex-extra latexmk
 
-    # Build all .tex files into PDFs
     - name: Compile LaTeX memos
       run: |
         mkdir -p docs/memos
-        for src in memos/*.tex; do
-          latexmk -pdf -jobname=$(basename "$src" .tex) -output-directory=docs/memos "$src"
+        for dir in memos/*/ ; do
+          for src in "$dir"/*.tex ; do
+            fname=$(basename "$src" .tex)
+            latexmk -pdf \
+              -jobname="$fname" \
+              -output-directory=docs/memos \
+              "$src"
+          done
         done
 
-    # Copy Jekyll config and index into docs/
+    - name: Copy direct PDF uploads
+      run: |
+        mkdir -p docs/notebooks
+        cp notebooks/*.pdf docs/notebooks/ || echo "No uploads to copy"
+
     - name: Prepare Jekyll site
       run: |
         cp docs/_config.yml docs/
         cp docs/index.md docs/
 
-    # Commit built docs back (so Pages can serve them)
-    - name: Commit generated PDFs
+    - name: Commit generated files
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/memos/*.pdf docs/index.md docs/_config.yml
-        git commit -m "📝 rebuild memos" || echo "No changes to commit"
+        git add docs/memos/*.pdf docs/notebooks/*.pdf docs/index.md docs/_config.yml
+        git commit -m "rebuild memos & notebooks" || echo "No changes to commit"
 
     - name: Push to GitHub
       uses: ad-m/github-push-action@v0.6.0
