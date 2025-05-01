@@ -7,6 +7,12 @@ on:
       - 'memos/**'
       - 'notebooks/**'
       - '.github/workflows/build‑memos.yml'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'memos/**'
+      - 'notebooks/**'
+      - '.github/workflows/build‑memos.yml'
 
 jobs:
   build:
@@ -39,6 +45,14 @@ jobs:
       run: |
         mkdir -p docs/notebooks
         cp notebooks/*.pdf docs/notebooks/ || echo "No uploads to copy"
+
+    - name: Upload PDFs for review
+      uses: actions/upload-artifact@v3
+      with:
+        name: memo-pdfs
+        paths: |
+          docs/memos/*.pdf
+          docs/notebooks/*.pdf
 
     - name: Prepare Jekyll site
       run: |
