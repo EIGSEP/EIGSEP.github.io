@@ -21,7 +21,7 @@ jobs:
     - name: Install TeX Live & unzip
       run: |
         sudo apt-get update
-        sudo apt-get install -y texlive-latex-extra latexmk unzip
+        sudo apt-get install -y texlive-latex-extra texlive-publishers latexmk unzip
 
     - name: Unzip memo ZIPs
       run: |
@@ -29,10 +29,9 @@ jobs:
         for z in memos/*.zip; do
           if [[ -f "$z" ]]; then
             name=$(basename "$z" .zip)
-            target="memos/$name"
-            mkdir -p "$target"
-            echo "Unzipping $z to $target"
-            unzip -o "$z" -d "$target"
+            mkdir -p "memos/$name"
+            echo "Unzipping $z to memos/$name/"
+            unzip -o "$z" -d "memos/$name"
           fi
         done
         # Unzip any ZIPs inside memo subfolders
@@ -48,17 +47,22 @@ jobs:
     - name: Compile LaTeX memos
       run: |
         mkdir -p docs/memos
-        # Compile each memo in its own subfolder
+        # Compile each memo directory, naming PDF after the folder
         for dir in memos/*/ ; do
-          for src in "$dir"/*.tex ; do
-            fname=$(basename "$src" .tex)
-            echo "Compiling $src -> docs/memos/$fname.pdf"
+          name=$(basename "$dir")
+          echo "Processing memo $name"
+          (
+            cd "$dir"
+            texfile=$(ls *.tex | head -n1)
+            echo "Compiling $texfile as $name.pdf"
             latexmk -pdf \
-              -jobname="$fname" \
-              -output-directory=docs/memos \
-              "$src"
-          done
+              -jobname="$name" \
+              -output-directory="../../docs/memos" \
+              "$texfile"
+          )
         done
+        # Clean auxiliary files
+        find docs/memos -type f ! -name '*.pdf' -delete
 
     - name: Upload PDFs for review
       uses: actions/upload-artifact@v4
