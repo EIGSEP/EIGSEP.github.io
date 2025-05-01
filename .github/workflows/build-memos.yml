@@ -47,7 +47,7 @@ jobs:
         cp notebooks/*.pdf docs/notebooks/ || echo "No uploads to copy"
 
     - name: Upload PDFs for review
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: memo-pdfs
         paths: |
