@@ -28,8 +28,11 @@ jobs:
         # Unzip any ZIP files placed directly in memos/
         for z in memos/*.zip; do
           if [[ -f "$z" ]]; then
-            echo "Unzipping $z to memos/"
-            unzip -o "$z" -d memos/
+            name=$(basename "$z" .zip)
+            target="memos/$name"
+            mkdir -p "$target"
+            echo "Unzipping $z to $target"
+            unzip -o "$z" -d "$target"
           fi
         done
         # Unzip any ZIPs inside memo subfolders
