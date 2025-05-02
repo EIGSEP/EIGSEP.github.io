@@ -9,7 +9,7 @@ Enjoy!
 
 <ol>
 {% for file in site.static_files %}
-  {% if file.extname == ".pdf" and file.path contains "memos/" %}
+  {% if file.extname == ".pdf" and file.path contains "pdfs/" %}
   <li>
     <a href="{{ file.path }}">{{ file.name | replace: ".pdf", "" }}</a>
   </li>
