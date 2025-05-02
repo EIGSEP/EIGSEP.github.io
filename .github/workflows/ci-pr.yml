@@ -1,0 +1,71 @@
+name: CI / Build Memos (PR)
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'memos/**'
+      - 'uploads/**'
+      - '.github/workflows/ci-pr.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Install TeX Live & unzip
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-latex-extra texlive-publishers latexmk unzip
+
+    - name: Unzip memo ZIPs
+      run: |
+        # Unzip any ZIP files placed directly in memos/
+        for z in memos/*.zip; do
+          if [[ -f "$z" ]]; then
+            name=$(basename "$z" .zip)
+            mkdir -p "memos/$name"
+            echo "Unzipping $z to memos/$name/"
+            unzip -o "$z" -d "memos/$name"
+          fi
+        done
+        # Unzip any ZIPs inside memo subfolders
+        for dir in memos/*/ ; do
+          for z in "$dir"/*.zip; do
+            if [[ -f "$z" ]]; then
+              echo "Unzipping $z to $dir"
+              unzip -o "$z" -d "$dir"
+            fi
+          done
+        done
+
+    - name: Compile LaTeX memos
+      run: |
+        mkdir -p docs/memos
+        # Compile each memo directory, naming PDF after the folder
+        for dir in memos/*/ ; do
+          name=$(basename "$dir")
+          echo "Processing memo $name"
+          (
+            cd "$dir"
+            texfile=$(ls *.tex | head -n1)
+            echo "Compiling $texfile as $name.pdf"
+            latexmk -pdf \
+              -jobname="$name" \
+              -output-directory="../../docs/memos" \
+              "$texfile"
+          )
+        done
+        # Clean auxiliary files
+        find docs/memos -type f ! -name '*.pdf' -delete
+
+    - name: Upload PDFs for review
+      uses: actions/upload-artifact@v4
+      with:
+        name: memo-pdfs
+        path: docs/memos/*.pdf
