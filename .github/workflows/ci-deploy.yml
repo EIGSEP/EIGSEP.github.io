@@ -73,7 +73,7 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/memos/*.pdf docs/uploads/*.pdf
+        git add docs/
         git commit -m "rebuild memos & uploads" || echo "No changes to commit"
 
     - name: Push to GitHub
