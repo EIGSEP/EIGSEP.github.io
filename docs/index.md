@@ -1,20 +1,19 @@
 ---
 layout: default
-title: EIGSEP Memo Series
+title: EIGSEP
 ---
 
 # EIGSEP Technical Memos
 
 Enjoy!
 
-<ul>
+<ol>
 {% for file in site.static_files %}
   {% if file.extname == ".pdf" and file.path contains "memos/" %}
   <li>
-    **{{ file.name | replace: ".pdf", "" }}** &mdash;
-    <a href="{{ file.path }}">Download PDF</a>
+    <a href="{{ file.path }}">{{ file.name | replace: ".pdf", "" }}</a>
   </li>
   {% endif %}
 {% endfor %}
-</ul>
+</ol>
 

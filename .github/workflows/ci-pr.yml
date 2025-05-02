@@ -46,7 +46,7 @@ jobs:
 
     - name: Compile LaTeX memos
       run: |
-        mkdir -p docs/memos
+        mkdir -p docs/pdfs
         # Compile each memo directory, naming PDF after the folder
         for dir in memos/*/ ; do
           name=$(basename "$dir")
@@ -57,15 +57,15 @@ jobs:
             echo "Compiling $texfile as $name.pdf"
             latexmk -pdf \
               -jobname="$name" \
-              -output-directory="../../docs/memos" \
+              -output-directory="../../docs/pdfs" \
               "$texfile"
           )
         done
         # Clean auxiliary files
-        find docs/memos -type f ! -name '*.pdf' -delete
+        find docs/pdfs -type f ! -name '*.pdf' -delete
 
     - name: Upload PDFs for review
       uses: actions/upload-artifact@v4
       with:
         name: memo-pdfs
-        path: docs/memos/*.pdf
+        path: docs/pdfs/*.pdf

@@ -46,7 +46,7 @@ jobs:
 
     - name: Compile LaTeX memos
       run: |
-        mkdir -p docs/memos
+        mkdir -p docs/pdfs
         # Compile each memo directory, naming PDF after the folder
         for dir in memos/*/ ; do
           name=$(basename "$dir")
@@ -57,23 +57,22 @@ jobs:
             echo "Compiling $texfile as $name.pdf"
             latexmk -pdf \
               -jobname="$name" \
-              -output-directory="../../docs/memos" \
+              -output-directory="../../docs/pdfs" \
               "$texfile"
           )
         done
         # Clean auxiliary files
-        find docs/memos -type f ! -name '*.pdf' -delete
+        find docs/pdfs -type f ! -name '*.pdf' -delete
 
     - name: Copy direct PDF uploads
       run: |
-        mkdir -p docs/uploads
-        cp uploads/*.pdf docs/uploads/ || echo "No uploads to copy"
+        cp uploads/*.pdf docs/pdfs/ || echo "No uploads to copy"
 
     - name: Commit generated files
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/
+        git add docs/pdfs
         git commit -m "rebuild memos & uploads" || echo "No changes to commit"
 
     - name: Push to GitHub

@@ -1,9 +1,9 @@
-title: EIGSEP Technical Memos
+title: EIGSEP
 theme: minima
 plugins: [jekyll‐feed]
 defaults:
   - scope:
-      path: "memos"
+      path: "pdfs"
       type: "static_file"
     values:
       layout: nil
