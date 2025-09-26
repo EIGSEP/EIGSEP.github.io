@@ -6,6 +6,10 @@ on:
     paths:
       - 'memos/**'
       - 'uploads/**'
+      - 'notebooks/**'          # NEW
+      - 'docs/notebooks.json'   # NEW (if edited by hand)
+      - 'docs/assets/js/**'     # (if app.js changes)
+      - 'docs/index.html'       # (optional)
       - '.github/workflows/ci-pr.yml'
 
 jobs:
@@ -63,6 +67,102 @@ jobs:
         done
         # Clean auxiliary files
         find docs/pdfs -type f ! -name '*.pdf' -delete
+    - name: Set up Python for notebook build
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install nbconvert toolchain
+      run: |
+        python -m pip install --upgrade pip
+        pip install nbconvert==7.* nbformat==5.* jinja2==3.* pygments==2.* pandocfilters
+
+    - name: Convert .ipynb to HTML
+      run: |
+        set -e
+        mkdir -p docs/notebooks
+        shopt -s nullglob
+        for nb in notebooks/*.ipynb; do
+          echo "Converting $nb"
+          jupyter nbconvert --to html --output-dir "docs/notebooks" "$nb"
+        done
+
+    - name: Generate docs/notebooks.json
+      run: |
+        python - <<'PY'
+        import json, os, re, subprocess
+        from datetime import datetime, timezone
+        from pathlib import Path
+        import nbformat
+
+        REPO = Path(".").resolve()
+        SRC_DIR = REPO / "notebooks"
+        OUT_DIR = REPO / "docs" / "notebooks"
+        MANIFEST = REPO / "docs" / "notebooks.json"
+
+        def git_last_modified(path: Path) -> str:
+          try:
+            iso = subprocess.check_output(
+              ["git", "log", "-1", "--format=%cI", "--", str(path)],
+              text=True
+            ).strip()
+            return iso or datetime.now(timezone.utc).isoformat()
+          except Exception:
+            return datetime.now(timezone.utc).isoformat()
+
+        def first_h1(nb):
+          for cell in nb.cells:
+            if cell.cell_type == "markdown":
+              for line in cell.source.splitlines():
+                if line.startswith("# "):
+                  return line[2:].strip()
+          return None
+
+        def meta_list(meta, key):
+          v = meta.get(key)
+          if isinstance(v, list): return v
+          if isinstance(v, str) and v.strip(): return [v.strip()]
+          return []
+
+        items = []
+        if SRC_DIR.exists():
+          for ipynb in sorted(SRC_DIR.glob("*.ipynb")):
+            try:
+              nb = nbformat.read(str(ipynb), as_version=4)
+            except Exception:
+              nb = None
+
+            title = (nb.metadata.get("title") if nb else None) or (first_h1(nb) if nb else None) or ipynb.stem
+            authors = (meta_list(nb.metadata, "authors") if nb else []) or ["Charlie Tolley"]  # default author
+            tags = meta_list(nb.metadata, "tags") if nb else []
+            summary = nb.metadata.get("summary") if (nb and "summary" in nb.metadata) else ""
+
+            href = f"/notebooks/{ipynb.with_suffix('.html').name}"
+            items.append({
+              "title": title,
+              "date": git_last_modified(ipynb),
+              "authors": authors,
+              "tags": tags,
+              "href": href,
+              "source": f"/{ipynb.as_posix()}",
+              "kind": "notebook",
+              "summary": summary
+            })
+
+        MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+        with open(MANIFEST, "w", encoding="utf-8") as f:
+          json.dump(items, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {MANIFEST} with {len(items)} item(s).")
+        PY
+
+    - name: Upload notebooks for review
+      uses: actions/upload-artifact@v4
+      with:
+        name: notebook-html-and-manifest
+        path: |
+          docs/notebooks/*.html
+          docs/notebooks.json
+        if-no-files-found: ignore
 
     - name: Upload PDFs for review
       uses: actions/upload-artifact@v4
