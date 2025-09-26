@@ -30,12 +30,19 @@ See uploaded memos here: https://eigsep.github.io/
    git push
    ```
    
-   You can also upload a pdf of a Jupyter Notebook directly:
+   You can also upload a Jupyter Notebook directly:
    ```bash
-   cp path/to/your-notebook.pdf notebooks/
-   git add notebooks/your-notebook.pdf
+   cp path/to/your-notebook.ipynb notebooks/
+   git add notebooks/your-notebook.ipynb
    git commit -m "initial commit"
    git push
+
+   *Note that if you want a notebook memo to have your name and tags, you will have to add them to the Notebook metadata. Click **Edit > Edit Notebook Metadata** in you Jupyter Notebook and type something like:*
+   ```bash
+   "authors" : ["Charlie G. Tolley"],
+   "tags" : ["Calibration", "Hardware"]
+   *In the top level of the metadata JSON.*
+   
 
 6. **Create a pull request**  
    Go to the GitHub repository and create a pull request from your branch to the main branch. This will allow others to review your changes before merging them into the main branch.
