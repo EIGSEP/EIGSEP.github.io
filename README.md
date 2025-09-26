@@ -37,11 +37,11 @@ See uploaded memos here: https://eigsep.github.io/
    git commit -m "initial commit"
    git push
 
-   *Note that if you want a notebook memo to have your name and tags, you will have to add them to the Notebook metadata. Click **Edit > Edit Notebook Metadata** in you Jupyter Notebook and type something like:*
+*Note that if you want a notebook memo to have your name and tags, you will have to add them to the Notebook metadata. Click **Edit > Edit Notebook Metadata** in you Jupyter Notebook and type something like:*
    ```bash
    "authors" : ["Charlie G. Tolley"],
    "tags" : ["Calibration", "Hardware"]
-   *In the top level of the metadata JSON.*
+*In the top level of the metadata JSON.*
    
 
 6. **Create a pull request**  
