@@ -1,9 +1,15 @@
 [
   {
     "title": "Lab Test of Antenna S11",
-    "date": "2025-09-26T12:00:30-07:00",
-    "authors": [],
-    "tags": [],
+    "date": "2025-09-26T12:10:03-07:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test"
+    ],
     "href": "/notebooks/antenna_s11_memo.html",
     "source": "//home/runner/work/EIGSEP.github.io/EIGSEP.github.io/notebooks/antenna_s11_memo.ipynb",
     "kind": "notebook",
@@ -11,9 +17,14 @@
   },
   {
     "title": "Voltage Dependencies of Noise Source and LNA",
-    "date": "2025-09-26T12:00:30-07:00",
-    "authors": [],
-    "tags": [],
+    "date": "2025-09-26T12:10:03-07:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "Hardware"
+    ],
     "href": "/notebooks/voltage_dependencies.html",
     "source": "//home/runner/work/EIGSEP.github.io/EIGSEP.github.io/notebooks/voltage_dependencies.ipynb",
     "kind": "notebook",
