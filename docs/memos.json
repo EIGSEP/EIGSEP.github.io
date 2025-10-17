@@ -1,43 +1,38 @@
 [
   {
-    "slug": "switches-vna-software",
+    "slug": "Switches-VNA-software",
     "title": "Switches and VNA Software for Automation",
-    "date": "2025-06-18",
+    "date": "2025-10-17T23:36:18.636724+00:00",
     "authors": [
-      "Charlie G. Tolley"
+      "Charlie G Tolley"
     ],
-    "affiliations": [
-      "Department of Astronomy, University of California Berkeley",
-      "Radio Astronomy Laboratory, University of California Berkeley"
-    ],
+    "tags": [],
     "pdf": "/pdfs/Switches-VNA-software.pdf",
-    "tags": [
-      "VNA",
-      "Switching",
-      "Automation",
-      "Software"
-    ],
-    "summary": "Overview of the automated control software for the Copper Mountain R60 1-port VNA and the SPDT switch network, including basic commands and example scripts for measuring S11 and calibration cycles.",
-    "code": "https://github.com/EIGSEP/CMT-VNA"
+    "summary": "",
+    "kind": "memo"
   },
   {
-    "slug": "switch-config-memo",
+    "slug": "switch_config_memo",
     "title": "Switch Configuration",
-    "date": "2025-06-18",
+    "date": "2025-10-17T23:36:18.638884+00:00",
+    "authors": [
+      "Charlie Tolley"
+    ],
+    "tags": [],
+    "pdf": "/pdfs/switch_config_memo.pdf",
+    "summary": "",
+    "kind": "memo"
+  },
+  {
+    "slug": "system_setup",
+    "title": "Basic System Setup for Measurement",
+    "date": "2025-10-17T23:36:18.641004+00:00",
     "authors": [
       "Charlie G. Tolley"
     ],
-    "affiliations": [
-      "Department of Astronomy, University of California Berkeley",
-      "Radio Astronomy Laboratory, University of California Berkeley"
-    ],
-    "pdf": "/pdfs/switch_config_memo.pdf",
-    "tags": [
-      "Hardware",
-      "Switching",
-      "Calibration"
-    ],
-    "summary": "Describes the failsafe SPDT switch configuration for EIGSEP\u2019s automatic calibration paths (e.g., OUT\u2192ANT, VNA\u2192O/S/L), design choices, and expected power states during normal observing.",
-    "code": "https://github.com/EIGSEP/switchNW"
+    "tags": [],
+    "pdf": "/pdfs/system_setup.pdf",
+    "summary": "",
+    "kind": "memo"
   }
 ]
