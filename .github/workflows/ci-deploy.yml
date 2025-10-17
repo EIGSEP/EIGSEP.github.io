@@ -215,6 +215,7 @@ jobs:
         import json
         from pathlib import Path
         import subprocess
+        from datetime import datetime, timezone
 
         REPO = Path(".").resolve()
         CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
