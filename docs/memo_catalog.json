@@ -1,0 +1,24 @@
+[
+  {
+    "slug": "Switches-VNA-software",
+    "title": "Switches and VNA Software for Automation",
+    "authors": [
+      "Charlie G Tolley"
+    ],
+    "tags": [],
+    "summary": "",
+    "first_commit_date": "2025-10-17T23:55:50.815372+00:00",
+    "number": 1
+  },
+  {
+    "slug": "switch_config_memo",
+    "title": "Switch Configuration",
+    "authors": [
+      "Charlie Tolley"
+    ],
+    "tags": [],
+    "summary": "",
+    "first_commit_date": "2025-10-17T23:55:50.818218+00:00",
+    "number": 2
+  }
+]

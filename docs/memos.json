@@ -1,37 +1,29 @@
 [
   {
     "slug": "Switches-VNA-software",
+    "number": 1,
     "title": "Switches and VNA Software for Automation",
-    "date": "2025-10-17T23:36:18.636724+00:00",
+    "date": "2025-10-17T23:55:50.863683+00:00",
+    "first_commit_date": "2025-10-17T23:55:50.815372+00:00",
     "authors": [
       "Charlie G Tolley"
     ],
-    "tags": ["Switches", "Automation", "VNA", "Software"],
+    "tags": [],
     "pdf": "/pdfs/Switches-VNA-software.pdf",
-    "summary": "Summarizes the VNA and Switch software for the automation of the internal calibration setup.",
+    "summary": "",
     "kind": "memo"
   },
   {
     "slug": "switch_config_memo",
+    "number": 2,
     "title": "Switch Configuration",
-    "date": "2025-10-17T23:36:18.638884+00:00",
+    "date": "2025-10-17T23:55:50.865845+00:00",
+    "first_commit_date": "2025-10-17T23:55:50.818218+00:00",
     "authors": [
       "Charlie Tolley"
     ],
-    "tags": ["Switches", "Automation", "Hardware"],
-    "pdf": "/pdfs/switch_config_memo.pdf",
-    "summary": "Shows the configuration of the SPDT switches in our internal calibration setup.",
-    "kind": "memo"
-  },
-  {
-    "slug": "system_setup",
-    "title": "Basic System Setup for Measurement",
-    "date": "2025-10-17T23:36:18.641004+00:00",
-    "authors": [
-      "Charlie G. Tolley"
-    ],
     "tags": [],
-    "pdf": "/pdfs/system_setup.pdf",
+    "pdf": "/pdfs/switch_config_memo.pdf",
     "summary": "",
     "kind": "memo"
   }
