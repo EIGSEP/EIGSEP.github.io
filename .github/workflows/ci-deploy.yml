@@ -6,9 +6,9 @@ on:
     paths:
       - 'memos/**'
       - 'uploads/**'
-      - 'notebooks/**'          # NEW: rebuild on notebook changes
-      - 'docs/notebooks.json'   # NEW: rebuild when manifest changes
-      - 'docs/assets/js/**'     # pick up JS updates
+      - 'notebooks/**'
+      - 'docs/notebooks.json'
+      - 'docs/assets/js/**'
       - 'docs/index.html'
       - '.github/workflows/ci-deploy.yml'
 
@@ -68,27 +68,32 @@ jobs:
         # Clean auxiliary files
         find docs/pdfs -type f ! -name '*.pdf' -delete
 
-    - name: Generate docs/memos.json
+    - name: Copy direct PDF uploads
+      run: |
+        cp uploads/*.pdf docs/pdfs/ || echo "No uploads to copy"
+
+    - name: Generate memo catalog with persistent numbering
       run: |
         python - <<'PY'
         import json, os, re, subprocess
         from datetime import datetime, timezone
         from pathlib import Path
-    
+
         REPO = Path(".").resolve()
         MEMOS_DIR = REPO / "memos"
-        MANIFEST = REPO / "docs" / "memos.json"
-    
-        def git_last_modified(path: Path) -> str:
+        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
+
+        def git_first_commit_date(path: Path) -> str:
+          """Get the date of the FIRST commit that touched this path"""
           try:
             iso = subprocess.check_output(
-              ["git", "log", "-1", "--format=%cI", "--", str(path)],
+              ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--", str(path)],
               text=True
-            ).strip()
+            ).strip().split('\n')[-1]  # Get the last line (oldest commit)
             return iso or datetime.now(timezone.utc).isoformat()
           except Exception:
             return datetime.now(timezone.utc).isoformat()
-    
+
         def parse_latex_metadata(tex_path: Path):
           """Extract title, authors, tags from LaTeX comments or commands"""
           metadata = {"title": tex_path.stem, "authors": [], "tags": [], "summary": ""}
@@ -124,8 +129,20 @@ jobs:
             print(f"Warning: couldn't parse {tex_path}: {e}")
           
           return metadata
-    
-        items = []
+
+        # Load existing catalog if it exists
+        existing_catalog = {}
+        if CATALOG_FILE.exists():
+          try:
+            with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
+              catalog_data = json.load(f)
+              existing_catalog = {item['slug']: item for item in catalog_data}
+              print(f"Loaded existing catalog with {len(existing_catalog)} entries")
+          except Exception as e:
+            print(f"Warning: couldn't load existing catalog: {e}")
+
+        # Collect all current memos
+        current_memos = []
         if MEMOS_DIR.exists():
           for memo_dir in sorted(MEMOS_DIR.iterdir()):
             if not memo_dir.is_dir():
@@ -137,30 +154,110 @@ jobs:
               continue
             
             tex_path = tex_files[0]
+            slug = memo_dir.name
+            
+            # Check if this memo already has a number in the catalog
+            if slug in existing_catalog:
+              # Keep existing number and first_commit_date
+              memo_number = existing_catalog[slug]['number']
+              first_commit = existing_catalog[slug]['first_commit_date']
+              print(f"Memo {slug} keeps existing number: {memo_number}")
+            else:
+              # New memo - will assign number later
+              first_commit = git_first_commit_date(memo_dir)
+              memo_number = None
+              print(f"New memo {slug} with first commit: {first_commit}")
+            
             metadata = parse_latex_metadata(tex_path)
             
-            pdf_name = memo_dir.name + ".pdf"
-            
-            items.append({
-              "slug": memo_dir.name,
+            current_memos.append({
+              "slug": slug,
               "title": metadata["title"],
-              "date": git_last_modified(memo_dir),
               "authors": metadata["authors"],
               "tags": metadata["tags"],
-              "pdf": f"/pdfs/{pdf_name}",
               "summary": metadata["summary"],
-              "kind": "memo"
+              "first_commit_date": first_commit,
+              "number": memo_number
             })
-    
-        MANIFEST.parent.mkdir(parents=True, exist_ok=True)
-        with open(MANIFEST, "w", encoding="utf-8") as f:
-          json.dump(items, f, indent=2, ensure_ascii=False)
-        print(f"Wrote {MANIFEST} with {len(items)} item(s).")
+
+        # Separate memos with and without numbers
+        numbered_memos = [m for m in current_memos if m['number'] is not None]
+        new_memos = [m for m in current_memos if m['number'] is None]
+
+        # Sort new memos by first_commit_date, then alphabetically by slug
+        new_memos.sort(key=lambda m: (m['first_commit_date'], m['slug']))
+
+        # Assign numbers to new memos
+        if numbered_memos:
+          next_number = max(m['number'] for m in numbered_memos) + 1
+        else:
+          next_number = 1
+
+        for memo in new_memos:
+          memo['number'] = next_number
+          print(f"Assigned number {next_number} to {memo['slug']}")
+          next_number += 1
+
+        # Combine all memos and sort by number
+        all_memos = numbered_memos + new_memos
+        all_memos.sort(key=lambda m: m['number'])
+
+        # Save catalog
+        CATALOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        with open(CATALOG_FILE, "w", encoding="utf-8") as f:
+          json.dump(all_memos, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {CATALOG_FILE} with {len(all_memos)} memos")
         PY
 
-    - name: Copy direct PDF uploads
+    - name: Generate docs/memos.json from catalog
       run: |
-        cp uploads/*.pdf docs/pdfs/ || echo "No uploads to copy"
+        python - <<'PY'
+        import json
+        from pathlib import Path
+        import subprocess
+
+        REPO = Path(".").resolve()
+        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
+        MANIFEST = REPO / "docs" / "memos.json"
+
+        def git_last_modified(path: Path) -> str:
+          """Get the date of the LAST modification"""
+          try:
+            iso = subprocess.check_output(
+              ["git", "log", "-1", "--format=%cI", "--", str(path)],
+              text=True
+            ).strip()
+            return iso or datetime.now(timezone.utc).isoformat()
+          except Exception:
+            return datetime.now(timezone.utc).isoformat()
+
+        # Load catalog
+        with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
+          catalog = json.load(f)
+
+        # Create memos.json with additional fields
+        items = []
+        for memo in catalog:
+          memo_dir = REPO / "memos" / memo['slug']
+          pdf_name = memo['slug'] + ".pdf"
+          
+          items.append({
+            "slug": memo['slug'],
+            "number": memo['number'],
+            "title": memo['title'],
+            "date": git_last_modified(memo_dir),  # Last modified date for sorting
+            "first_commit_date": memo['first_commit_date'],  # Original commit date
+            "authors": memo['authors'],
+            "tags": memo['tags'],
+            "pdf": f"/pdfs/{pdf_name}",
+            "summary": memo['summary'],
+            "kind": "memo"
+          })
+
+        with open(MANIFEST, "w", encoding="utf-8") as f:
+          json.dump(items, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {MANIFEST} with {len(items)} memos")
+        PY
 
     - name: Set up Python for notebook build
       uses: actions/setup-python@v5
@@ -171,7 +268,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install nbconvert==7.* nbformat==5.* jinja2==3.* pygments==2.* pandocfilters
-        # pandoc is not strictly required for basic HTML; if you use markdown with special filters, you may also apt-get pandoc.
 
     - name: Convert .ipynb to HTML
       run: |
@@ -202,7 +298,6 @@ jobs:
               ["git", "log", "-1", "--format=%cI", "--", str(path)],
               text=True
             ).strip()
-            # Fallback to now if file is new/untracked in CI
             return iso or datetime.now(timezone.utc).isoformat()
           except Exception:
             return datetime.now(timezone.utc).isoformat()
@@ -210,7 +305,6 @@ jobs:
         def first_markdown_h1(nb):
           for cell in nb.cells:
             if cell.cell_type == "markdown":
-              # find first line that looks like an H1: "# Title"
               for line in cell.source.splitlines():
                 if line.startswith("# "):
                   return line[2:].strip()
@@ -237,25 +331,21 @@ jobs:
             tags = []
 
             if nb:
-              # Title: prefer notebook metadata 'title', then first H1, else filename
               title = (nb.metadata.get("title") or first_markdown_h1(nb) or ipynb.stem).strip()
-              # Authors / tags if present (conventions vary)
               authors = meta_list(nb.metadata, "authors")
               tags = meta_list(nb.metadata, "tags")
 
             href = f"/notebooks/{ipynb.with_suffix('.html').name}"
             date_iso = git_last_modified(ipynb)
-
-            # Summary (optional): use metadata.summary or empty
             summary = nb.metadata.get("summary") if nb and "summary" in nb.metadata else ""
 
             items.append({
               "title": title or ipynb.stem,
-              "date": date_iso,           # ISO 8601; your app sorts by Date() fine
+              "date": date_iso,
               "authors": authors,
               "tags": tags,
-              "href": href,               # HTML page we just built
-              "source": f"/{ipynb.as_posix()}",  # raw ipynb path (optional, useful)
+              "href": href,
+              "source": f"/{ipynb.as_posix()}",
               "kind": "notebook",
               "summary": summary,
             })
@@ -270,15 +360,8 @@ jobs:
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/notebooks docs/notebooks.json docs/memos.json
-        git commit -m "rebuild notebooks, memos & manifests" || echo "No changes to commit"
-
-    - name: Commit generated files
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/pdfs
-        git commit -m "rebuild memos & uploads" || echo "No changes to commit"
+        git add docs/notebooks docs/notebooks.json docs/memos.json docs/memo_catalog.json docs/pdfs
+        git commit -m "rebuild notebooks, memos, pdfs & manifests" || echo "No changes to commit"
 
     - name: Push to GitHub
       uses: ad-m/github-push-action@v0.6.0

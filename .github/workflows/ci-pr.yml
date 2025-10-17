@@ -6,10 +6,10 @@ on:
     paths:
       - 'memos/**'
       - 'uploads/**'
-      - 'notebooks/**'          # NEW
-      - 'docs/notebooks.json'   # NEW (if edited by hand)
-      - 'docs/assets/js/**'     # (if app.js changes)
-      - 'docs/index.html'       # (optional)
+      - 'notebooks/**'
+      - 'docs/notebooks.json'
+      - 'docs/assets/js/**'
+      - 'docs/index.html'
       - '.github/workflows/ci-pr.yml'
 
 jobs:
@@ -67,105 +67,44 @@ jobs:
         done
         # Clean auxiliary files
         find docs/pdfs -type f ! -name '*.pdf' -delete
-    - name: Set up Python for notebook build
-      uses: actions/setup-python@v5
-      with:
-        python-version: '3.11'
 
-    - name: Install nbconvert toolchain
-      run: |
-        python -m pip install --upgrade pip
-        pip install nbconvert==7.* nbformat==5.* jinja2==3.* pygments==2.* pandocfilters
-
-    - name: Convert .ipynb to HTML
-      run: |
-        set -e
-        mkdir -p docs/notebooks
-        shopt -s nullglob
-        for nb in notebooks/*.ipynb; do
-          echo "Converting $nb"
-          jupyter nbconvert --to html --output-dir "docs/notebooks" "$nb"
-        done
-
-    - name: Generate docs/notebooks.json
+    - name: Generate memo catalog with persistent numbering
       run: |
         python - <<'PY'
         import json, os, re, subprocess
         from datetime import datetime, timezone
         from pathlib import Path
-        import nbformat
 
         REPO = Path(".").resolve()
-        SRC_DIR = REPO / "notebooks"
-        OUT_DIR = REPO / "docs" / "notebooks"
-        MANIFEST = REPO / "docs" / "notebooks.json"
+        MEMOS_DIR = REPO / "memos"
+        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
 
-        def git_last_modified(path: Path) -> str:
+        def git_first_commit_date(path: Path) -> str:
+          """Get the date of the FIRST commit that touched this path"""
           try:
             iso = subprocess.check_output(
-              ["git", "log", "-1", "--format=%cI", "--", str(path)],
+              ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--", str(path)],
               text=True
-            ).strip()
+            ).strip().split('\n')[-1]  # Get the last line (oldest commit)
             return iso or datetime.now(timezone.utc).isoformat()
           except Exception:
             return datetime.now(timezone.utc).isoformat()
 
-        def first_h1(nb):
-          for cell in nb.cells:
-            if cell.cell_type == "markdown":
-              for line in cell.source.splitlines():
-                if line.startswith("# "):
-                  return line[2:].strip()
-          return None
-
-        def meta_list(meta, key):
-          v = meta.get(key)
-          if isinstance(v, list): return v
-          if isinstance(v, str) and v.strip(): return [v.strip()]
-          return []
-
-        items = []
-        if SRC_DIR.exists():
-          for ipynb in sorted(SRC_DIR.glob("*.ipynb")):
-            try:
-              nb = nbformat.read(str(ipynb), as_version=4)
-            except Exception:
-              nb = None
-
-            title = (nb.metadata.get("title") if nb else None) or (first_h1(nb) if nb else None) or ipynb.stem
-            authors = (meta_list(nb.metadata, "authors") if nb else []) or ["Charlie Tolley"]  # default author
-            tags = meta_list(nb.metadata, "tags") if nb else []
-            summary = nb.metadata.get("summary") if (nb and "summary" in nb.metadata) else ""
-
-            href = f"/notebooks/{ipynb.with_suffix('.html').name}"
-            items.append({
-              "title": title,
-              "date": git_last_modified(ipynb),
-              "authors": authors,
-              "tags": tags,
-              "href": href,
-              "source": f"/{ipynb.as_posix()}",
-              "kind": "notebook",
-              "summary": summary
-            })
-
-        MANIFEST.parent.mkdir(parents=True, exist_ok=True)
-        with open(MANIFEST, "w", encoding="utf-8") as f:
-          json.dump(items, f, indent=2, ensure_ascii=False)
-        print(f"Wrote {MANIFEST} with {len(items)} item(s).")
-        PY
-
-    - name: Upload notebooks for review
-      uses: actions/upload-artifact@v4
-      with:
-        name: notebook-html-and-manifest
-        path: |
-          docs/notebooks/*.html
-          docs/notebooks.json
-        if-no-files-found: ignore
-
-    - name: Upload PDFs for review
-      uses: actions/upload-artifact@v4
-      with:
-        name: memo-pdfs
-        path: docs/pdfs/*.pdf
+        def parse_latex_metadata(tex_path: Path):
+          """Extract title, authors, tags from LaTeX comments or commands"""
+          metadata = {"title": tex_path.stem, "authors": [], "tags": [], "summary": ""}
+          
+          try:
+            content = tex_path.read_text(encoding='utf-8', errors='ignore')
+            
+            # Look for % TITLE: ... or \title{...}
+            title_match = re.search(r'%\s*TITLE:\s*(.+)', content) or \
+                         re.search(r'\\title\{([^}]+)\}', content)
+            if title_match:
+              metadata["title"] = title_match.group(1).strip()
+            
+            # Look for % AUTHORS: ... or \author{...}
+            authors_match = re.search(r'%\s*AUTHORS?:\s*(.+)', content) or \
+                           re.search(r'\\author\{([^}]+)\}', content)
+            if authors_match:
+              authors_str = authors

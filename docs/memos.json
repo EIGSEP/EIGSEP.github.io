@@ -6,9 +6,9 @@
     "authors": [
       "Charlie G Tolley"
     ],
-    "tags": [],
+    "tags": ["Switches", "Automation", "VNA", "Software"],
     "pdf": "/pdfs/Switches-VNA-software.pdf",
-    "summary": "",
+    "summary": "Summarizes the VNA and Switch software for the automation of the internal calibration setup.",
     "kind": "memo"
   },
   {
@@ -18,9 +18,9 @@
     "authors": [
       "Charlie Tolley"
     ],
-    "tags": [],
+    "tags": ["Switches", "Automation", "Hardware"],
     "pdf": "/pdfs/switch_config_memo.pdf",
-    "summary": "",
+    "summary": "Shows the configuration of the SPDT switches in our internal calibration setup.",
     "kind": "memo"
   },
   {
