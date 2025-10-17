@@ -68,6 +68,96 @@ jobs:
         # Clean auxiliary files
         find docs/pdfs -type f ! -name '*.pdf' -delete
 
+    - name: Generate docs/memos.json
+      run: |
+        python - <<'PY'
+        import json, os, re, subprocess
+        from datetime import datetime, timezone
+        from pathlib import Path
+    
+        REPO = Path(".").resolve()
+        MEMOS_DIR = REPO / "memos"
+        MANIFEST = REPO / "docs" / "memos.json"
+    
+        def git_last_modified(path: Path) -> str:
+          try:
+            iso = subprocess.check_output(
+              ["git", "log", "-1", "--format=%cI", "--", str(path)],
+              text=True
+            ).strip()
+            return iso or datetime.now(timezone.utc).isoformat()
+          except Exception:
+            return datetime.now(timezone.utc).isoformat()
+    
+        def parse_latex_metadata(tex_path: Path):
+          """Extract title, authors, tags from LaTeX comments or commands"""
+          metadata = {"title": tex_path.stem, "authors": [], "tags": [], "summary": ""}
+          
+          try:
+            content = tex_path.read_text(encoding='utf-8', errors='ignore')
+            
+            # Look for % TITLE: ... or \title{...}
+            title_match = re.search(r'%\s*TITLE:\s*(.+)', content) or \
+                         re.search(r'\\title\{([^}]+)\}', content)
+            if title_match:
+              metadata["title"] = title_match.group(1).strip()
+            
+            # Look for % AUTHORS: ... or \author{...}
+            authors_match = re.search(r'%\s*AUTHORS?:\s*(.+)', content) or \
+                           re.search(r'\\author\{([^}]+)\}', content)
+            if authors_match:
+              authors_str = authors_match.group(1).strip()
+              metadata["authors"] = [a.strip() for a in re.split(r'[,&]|\sand\s', authors_str) if a.strip()]
+            
+            # Look for % TAGS: ... 
+            tags_match = re.search(r'%\s*TAGS?:\s*(.+)', content)
+            if tags_match:
+              tags_str = tags_match.group(1).strip()
+              metadata["tags"] = [t.strip() for t in tags_str.split(',') if t.strip()]
+            
+            # Look for % SUMMARY: ...
+            summary_match = re.search(r'%\s*SUMMARY:\s*(.+)', content)
+            if summary_match:
+              metadata["summary"] = summary_match.group(1).strip()
+              
+          except Exception as e:
+            print(f"Warning: couldn't parse {tex_path}: {e}")
+          
+          return metadata
+    
+        items = []
+        if MEMOS_DIR.exists():
+          for memo_dir in sorted(MEMOS_DIR.iterdir()):
+            if not memo_dir.is_dir():
+              continue
+            
+            # Find the .tex file
+            tex_files = list(memo_dir.glob("*.tex"))
+            if not tex_files:
+              continue
+            
+            tex_path = tex_files[0]
+            metadata = parse_latex_metadata(tex_path)
+            
+            pdf_name = memo_dir.name + ".pdf"
+            
+            items.append({
+              "slug": memo_dir.name,
+              "title": metadata["title"],
+              "date": git_last_modified(memo_dir),
+              "authors": metadata["authors"],
+              "tags": metadata["tags"],
+              "pdf": f"/pdfs/{pdf_name}",
+              "summary": metadata["summary"],
+              "kind": "memo"
+            })
+    
+        MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+        with open(MANIFEST, "w", encoding="utf-8") as f:
+          json.dump(items, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {MANIFEST} with {len(items)} item(s).")
+        PY
+
     - name: Copy direct PDF uploads
       run: |
         cp uploads/*.pdf docs/pdfs/ || echo "No uploads to copy"
@@ -176,12 +266,12 @@ jobs:
         print(f"Wrote {MANIFEST} with {len(items)} item(s).")
         PY
 
-    - name: Commit generated notebook artifacts
+    - name: Commit generated artifacts
       run: |
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/notebooks docs/notebooks.json
-        git commit -m "rebuild notebooks & manifest" || echo "No notebook changes to commit"
+        git add docs/notebooks docs/notebooks.json docs/memos.json
+        git commit -m "rebuild notebooks, memos & manifests" || echo "No changes to commit"
 
     - name: Commit generated files
       run: |
