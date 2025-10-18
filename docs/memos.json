@@ -1,28 +1,37 @@
 [
   {
-    "slug": "Switches-VNA-software",
-    "number": 1,
+    "slug": "memo-Switches_VNA_software",
+    "number": 4,
     "title": "Switches and VNA Software for Automation",
-    "date": "2025-10-17T23:55:50.863683+00:00",
-    "first_commit_date": "2025-10-17T23:55:50.815372+00:00",
+    "date": "2025-10-18T00:17:00.587564+00:00",
+    "first_commit_date": "2025-10-18T00:17:00.283363+00:00",
     "authors": [
-      "Charlie G Tolley"
+      "Charlie G. Tolley"
     ],
-    "tags": [],
-    "pdf": "/pdfs/Switches-VNA-software.pdf",
+    "tags": [
+      "VNA",
+      "Switching",
+      "Automation",
+      "Software"
+    ],
+    "pdf": "/pdfs/Switches_VNA_software.pdf",
     "summary": "",
     "kind": "memo"
   },
   {
-    "slug": "switch_config_memo",
-    "number": 2,
+    "slug": "memo-switch_config_memo",
+    "number": 5,
     "title": "Switch Configuration",
-    "date": "2025-10-17T23:55:50.865845+00:00",
-    "first_commit_date": "2025-10-17T23:55:50.818218+00:00",
+    "date": "2025-10-18T00:17:00.589740+00:00",
+    "first_commit_date": "2025-10-18T00:17:00.286408+00:00",
     "authors": [
-      "Charlie Tolley"
+      "Charlie G. Tolley"
     ],
-    "tags": [],
+    "tags": [
+      "VNA",
+      "Hardware",
+      "Automation"
+    ],
     "pdf": "/pdfs/switch_config_memo.pdf",
     "summary": "",
     "kind": "memo"

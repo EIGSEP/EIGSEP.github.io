@@ -1,24 +1,87 @@
 [
   {
-    "slug": "Switches-VNA-software",
-    "title": "Switches and VNA Software for Automation",
+    "slug": "notebook-antenna_s11_memo",
+    "notebook_name": "antenna_s11_memo",
+    "title": "Lab Test of Antenna S11",
     "authors": [
-      "Charlie G Tolley"
+      "Charlie G. Tolley"
     ],
-    "tags": [],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test"
+    ],
     "summary": "",
-    "first_commit_date": "2025-10-17T23:55:50.815372+00:00",
-    "number": 1
+    "first_commit_date": "2025-09-26T09:27:08-07:00",
+    "number": 1,
+    "kind": "notebook"
   },
   {
-    "slug": "switch_config_memo",
+    "slug": "notebook-voltage_dependencies",
+    "notebook_name": "voltage_dependencies",
+    "title": "Voltage Dependencies of Noise Source and LNA",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "Hardware"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-09-26T09:27:08-07:00",
+    "number": 2,
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-cable_sparams",
+    "notebook_name": "cable_sparams",
+    "title": "in-lab cable s-parameter measurements",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S-parameters",
+      "Lab Test"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-16T15:06:15-07:00",
+    "number": 3,
+    "kind": "notebook"
+  },
+  {
+    "slug": "memo-Switches_VNA_software",
+    "memo_dir_name": "Switches_VNA_software",
+    "title": "Switches and VNA Software for Automation",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "VNA",
+      "Switching",
+      "Automation",
+      "Software"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-18T00:17:00.283363+00:00",
+    "number": 4,
+    "kind": "memo"
+  },
+  {
+    "slug": "memo-switch_config_memo",
+    "memo_dir_name": "switch_config_memo",
     "title": "Switch Configuration",
     "authors": [
-      "Charlie Tolley"
+      "Charlie G. Tolley"
     ],
-    "tags": [],
+    "tags": [
+      "VNA",
+      "Hardware",
+      "Automation"
+    ],
     "summary": "",
-    "first_commit_date": "2025-10-17T23:55:50.818218+00:00",
-    "number": 2
+    "first_commit_date": "2025-10-18T00:17:00.286408+00:00",
+    "number": 5,
+    "kind": "memo"
   }
 ]
