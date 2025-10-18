@@ -123,25 +123,30 @@ jobs:
           try:
             content = tex_path.read_text(encoding='utf-8', errors='ignore')
             
-            title_match = re.search(r'%\s*TITLE:\s*(.+)', content) or \
+            # Try comment-style first (% TITLE:), then LaTeX commands
+            title_match = re.search(r'%\s*TITLE:\s*(.+)', content, re.IGNORECASE) or \
                          re.search(r'\\title\{([^}]+)\}', content)
             if title_match:
               metadata["title"] = title_match.group(1).strip()
             
-            authors_match = re.search(r'%\s*AUTHORS?:\s*(.+)', content) or \
+            authors_match = re.search(r'%\s*AUTHORS?:\s*(.+)', content, re.IGNORECASE) or \
                            re.search(r'\\author\{([^}]+)\}', content)
             if authors_match:
               authors_str = authors_match.group(1).strip()
               metadata["authors"] = [a.strip() for a in re.split(r'[,&]|\sand\s', authors_str) if a.strip()]
             
-            tags_match = re.search(r'%\s*TAGS?:\s*(.+)', content)
+            # Look for tags in comments
+            tags_match = re.search(r'%\s*TAGS?:\s*(.+)', content, re.IGNORECASE)
             if tags_match:
               tags_str = tags_match.group(1).strip()
               metadata["tags"] = [t.strip() for t in tags_str.split(',') if t.strip()]
             
-            summary_match = re.search(r'%\s*SUMMARY:\s*(.+)', content)
+            summary_match = re.search(r'%\s*SUMMARY:\s*(.+)', content, re.IGNORECASE)
             if summary_match:
               metadata["summary"] = summary_match.group(1).strip()
+            
+            # Debug output
+            print(f"Parsed {tex_path.name}: title={metadata['title']}, authors={metadata['authors']}, tags={metadata['tags']}")
               
           except Exception as e:
             print(f"Warning: couldn't parse {tex_path}: {e}")
@@ -312,6 +317,8 @@ jobs:
         with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
           catalog = json.load(f)
 
+        print(f"Loaded catalog with {len(catalog)} total items")
+
         # Create memos.json - only include memo kind
         items = []
         for item in catalog:
@@ -319,18 +326,20 @@ jobs:
             memo_dir = REPO / "memos" / item['memo_dir_name']
             pdf_name = item['memo_dir_name'] + ".pdf"
             
-            items.append({
+            memo_item = {
               "slug": item['slug'],
               "number": item['number'],
               "title": item['title'],
-              "date": git_last_modified(memo_dir),
+              "date": git_last_modified(memo_dir) if memo_dir.exists() else item['first_commit_date'],
               "first_commit_date": item['first_commit_date'],
               "authors": item['authors'],
               "tags": item['tags'],
               "pdf": f"/pdfs/{pdf_name}",
               "summary": item['summary'],
               "kind": "memo"
-            })
+            }
+            items.append(memo_item)
+            print(f"Added memo #{item['number']}: {item['title']} with tags: {item['tags']}")
 
         with open(MANIFEST, "w", encoding="utf-8") as f:
           json.dump(items, f, indent=2, ensure_ascii=False)
@@ -364,6 +373,8 @@ jobs:
         with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
           catalog = json.load(f)
 
+        print(f"Loaded catalog with {len(catalog)} total items")
+        
         # Create notebooks.json - only include notebook kind
         items = []
         for item in catalog:
@@ -371,11 +382,11 @@ jobs:
             notebook_path = REPO / "notebooks" / f"{item['notebook_name']}.ipynb"
             href = f"/notebooks/{item['notebook_name']}.html"
             
-            items.append({
+            notebook_item = {
               "slug": item['slug'],
               "number": item['number'],
               "title": item['title'],
-              "date": git_last_modified(notebook_path),
+              "date": git_last_modified(notebook_path) if notebook_path.exists() else item['first_commit_date'],
               "first_commit_date": item['first_commit_date'],
               "authors": item['authors'],
               "tags": item['tags'],
@@ -383,7 +394,9 @@ jobs:
               "source": f"/notebooks/{item['notebook_name']}.ipynb",
               "summary": item['summary'],
               "kind": "notebook"
-            })
+            }
+            items.append(notebook_item)
+            print(f"Added notebook #{item['number']}: {item['title']}")
 
         with open(MANIFEST, "w", encoding="utf-8") as f:
           json.dump(items, f, indent=2, ensure_ascii=False)

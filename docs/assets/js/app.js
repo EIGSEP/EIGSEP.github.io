@@ -45,7 +45,14 @@
 
     if (q) {
       data = data.filter(m => {
-        const hay = [m.title, m.authors?.join(', '), m.summary, (m.tags||[]).join(' ')].join(' ').toLowerCase();
+        const hay = [
+          m.title, 
+          m.authors?.join(', '), 
+          m.summary, 
+          (m.tags||[]).join(' '),
+          m.number ? `#${m.number}` : '',
+          m.number ? `${m.number}` : ''
+        ].join(' ').toLowerCase();
         return hay.includes(q);
       });
     }
