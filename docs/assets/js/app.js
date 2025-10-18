@@ -78,23 +78,20 @@
     const primaryLink = m.pdf || m.href || m.url || '#';
     const primaryLabel = m.pdf ? 'Open PDF' : 'Open';
   
-    // Show number badge if it exists (for both memos and notebooks)
-    const numberBadge = m.number
-      ? `<span class="tag memo-number">#${m.number}</span>`
-      : '';
+    // Prepend number to title if it exists
+    const displayTitle = m.number ? `#${m.number} - ${m.title}` : m.title;
     
     const kindBadge = m.kind
       ? `<span class="tag">${escapeHTML(capitalize(m.kind))}</span>`
       : '';
   
     return `<li class="card">
-      <h3>${escapeHTML(m.title)}</h3>
+      <h3>${escapeHTML(displayTitle)}</h3>
       <div class="meta">
         ${authors ? `<span>${escapeHTML(authors)}</span>` : ''}
         ${dateFmt ? `<span>· ${dateFmt}</span>` : ''}
       </div>
       <div class="tags">
-        ${numberBadge}
         ${kindBadge}
         ${tags}
       </div>
