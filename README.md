@@ -14,6 +14,21 @@ See uploaded memos here: https://eigsep.github.io/
 3. **Download the project**  
    In Overleaf, go to Menu > Download > Download as ZIP. This will download a file named after your project, e.g., `memo_lna.zip`.
 
+4. **Add metadata**
+For Jupyter Notebooks, click **Edit > Edit Notebook Metadata** in you Jupyter Notebook and type something like:
+   ```bash
+   "authors" : ["Charlie G. Tolley"],
+   "tags" : ["Calibration", "Hardware"]
+   ```
+
+In the top level of the metadata JSON.
+
+For latex memos, replace the relevant metadata in the comments at the top of the template. It should look something like:
+% TITLE: Switches and VNA Software for Automation
+% AUTHORS: Charlie G. Tolley, Jane Doe
+% TAGS: VNA, Switching, Automation, Software
+% SUMMARY: Overview of the automated control software...
+
 4. **Put the downloaded Overleaf project in the memo folder**
    ```bash
    mv ~/Downloads/memo_lna memos/
@@ -37,14 +52,6 @@ See uploaded memos here: https://eigsep.github.io/
    git commit -m "initial commit"
    git push
    ```
-
-*Note that if you want a notebook memo to have your name and tags, you will have to add them to the Notebook metadata. Click **Edit > Edit Notebook Metadata** in you Jupyter Notebook and type something like:*
-   ```bash
-   "authors" : ["Charlie G. Tolley"],
-   "tags" : ["Calibration", "Hardware"]
-   ```
-
-*In the top level of the metadata JSON.*
    
 
 6. **Create a pull request**  
