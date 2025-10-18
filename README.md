@@ -24,11 +24,12 @@ For Jupyter Notebooks, click **Edit > Edit Notebook Metadata** in you Jupyter No
 In the top level of the metadata JSON.
 
 For latex memos, replace the relevant metadata in the comments at the top of the template. It should look something like:
+```bash
 % TITLE: Switches and VNA Software for Automation
 % AUTHORS: Charlie G. Tolley, Jane Doe
 % TAGS: VNA, Switching, Automation, Software
 % SUMMARY: Overview of the automated control software...
-
+```
 4. **Put the downloaded Overleaf project in the memo folder**
    ```bash
    mv ~/Downloads/memo_lna memos/
