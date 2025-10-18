@@ -58,7 +58,7 @@
       data.sort((a,b) => new Date(b.date) - new Date(a.date)); // newest
     }
 
-    countEl.textContent = data.length ? `${data.length} memo${data.length===1?'':'s'} shown` : 'No memos match your search.';
+    countEl.textContent = data.length ? `${data.length} item${data.length===1?'':'s'} shown` : 'No items match your search.';
     listEl.innerHTML = data.map(toCard).join('\n');
   }
 
@@ -71,6 +71,11 @@
     const primaryLink = m.pdf || m.href || m.url || '#';
     const primaryLabel = m.pdf ? 'Open PDF' : 'Open';
   
+    // Show number badge if it exists (for both memos and notebooks)
+    const numberBadge = m.number
+      ? `<span class="tag memo-number">#${m.number}</span>`
+      : '';
+    
     const kindBadge = m.kind
       ? `<span class="tag">${escapeHTML(capitalize(m.kind))}</span>`
       : '';
@@ -82,6 +87,7 @@
         ${dateFmt ? `<span>· ${dateFmt}</span>` : ''}
       </div>
       <div class="tags">
+        ${numberBadge}
         ${kindBadge}
         ${tags}
       </div>
