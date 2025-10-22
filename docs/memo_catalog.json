@@ -83,5 +83,21 @@
     "first_commit_date": "2025-10-18T00:17:00.286408+00:00",
     "number": 5,
     "kind": "memo"
+  },
+  {
+    "slug": "notebook-suspension_and_horizon_modeling",
+    "notebook_name": "suspension_and_horizon_modeling",
+    "title": "EIGSEP Suspension and Horizon Modeling",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Suspension",
+      "Horizons"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-22T16:18:59-07:00",
+    "number": 6,
+    "kind": "notebook"
   }
 ]
