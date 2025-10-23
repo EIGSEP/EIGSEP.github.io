@@ -48,9 +48,9 @@ jobs:
           done
         done
 
-    - name: Compile LaTeX memos
+    - name: Compile LaTeX memos to PR check directory
       run: |
-        mkdir -p docs/pdfs
+        mkdir -p docs/pr_check
         # Compile each memo directory, naming PDF after the folder
         for dir in memos/*/ ; do
           name=$(basename "$dir")
@@ -61,14 +61,14 @@ jobs:
             echo "Compiling $texfile as $name.pdf"
             latexmk -pdf \
               -jobname="$name" \
-              -output-directory="../../docs/pdfs" \
+              -output-directory="../../docs/pr_check" \
               "$texfile"
           )
         done
-        # Clean auxiliary files
-        find docs/pdfs -type f ! -name '*.pdf' -delete
+        # Clean auxiliary files, keep only PDFs
+        find docs/pr_check -type f ! -name '*.pdf' -delete
 
-    - name: Set up Python for builds
+    - name: Set up Python for notebook build
       uses: actions/setup-python@v5
       with:
         python-version: '3.11'
@@ -78,335 +78,27 @@ jobs:
         python -m pip install --upgrade pip
         pip install nbconvert==7.* nbformat==5.* jinja2==3.* pygments==2.* pandocfilters
 
-    - name: Convert .ipynb to HTML
+    - name: Convert .ipynb to HTML in PR check directory
       run: |
         set -e
-        mkdir -p docs/notebooks
+        mkdir -p docs/pr_check
         shopt -s nullglob
         for nb in notebooks/*.ipynb; do
           echo "Converting $nb"
-          jupyter nbconvert --to html --output-dir "docs/notebooks" "$nb"
+          jupyter nbconvert --to html --output-dir "docs/pr_check" "$nb"
         done
 
-    - name: Generate unified catalog with persistent numbering
-      run: |
-        python - <<'PY'
-        import json, os, re, subprocess
-        from datetime import datetime, timezone
-        from pathlib import Path
-        import nbformat
-
-        REPO = Path(".").resolve()
-        MEMOS_DIR = REPO / "memos"
-        NOTEBOOKS_DIR = REPO / "notebooks"
-        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
-
-        def git_first_commit_date(path: Path) -> str:
-          """Get the date of the FIRST commit that touched this path"""
-          try:
-            iso = subprocess.check_output(
-              ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--", str(path)],
-              text=True
-            ).strip().split('\n')[-1]
-            return iso or datetime.now(timezone.utc).isoformat()
-          except Exception:
-            return datetime.now(timezone.utc).isoformat()
-
-        def parse_latex_metadata(tex_path: Path):
-          """Extract title, authors, tags from LaTeX comments or commands"""
-          metadata = {"title": tex_path.stem, "authors": [], "tags": [], "summary": ""}
-          
-          try:
-            content = tex_path.read_text(encoding='utf-8', errors='ignore')
-            
-            # Try comment-style first (% TITLE:), then LaTeX commands
-            title_match = re.search(r'%\s*TITLE:\s*(.+)', content, re.IGNORECASE) or \
-                         re.search(r'\\title\{([^}]+)\}', content)
-            if title_match:
-              metadata["title"] = title_match.group(1).strip()
-            
-            authors_match = re.search(r'%\s*AUTHORS?:\s*(.+)', content, re.IGNORECASE) or \
-                           re.search(r'\\author\{([^}]+)\}', content)
-            if authors_match:
-              authors_str = authors_match.group(1).strip()
-              metadata["authors"] = [a.strip() for a in re.split(r'[,&]|\sand\s', authors_str) if a.strip()]
-            
-            # Look for tags in comments
-            tags_match = re.search(r'%\s*TAGS?:\s*(.+)', content, re.IGNORECASE)
-            if tags_match:
-              tags_str = tags_match.group(1).strip()
-              metadata["tags"] = [t.strip() for t in tags_str.split(',') if t.strip()]
-            
-            summary_match = re.search(r'%\s*SUMMARY:\s*(.+)', content, re.IGNORECASE)
-            if summary_match:
-              metadata["summary"] = summary_match.group(1).strip()
-            
-            # Debug output
-            print(f"Parsed {tex_path.name}: title={metadata['title']}, authors={metadata['authors']}, tags={metadata['tags']}")
-              
-          except Exception as e:
-            print(f"Warning: couldn't parse {tex_path}: {e}")
-          
-          return metadata
-
-        def first_markdown_h1(nb):
-          for cell in nb.cells:
-            if cell.cell_type == "markdown":
-              for line in cell.source.splitlines():
-                if line.startswith("# "):
-                  return line[2:].strip()
-          return None
-
-        def meta_list(meta, key):
-          v = meta.get(key)
-          if isinstance(v, list):
-            return v
-          if isinstance(v, str) and v.strip():
-            return [v.strip()]
-          return []
-
-        # Load existing catalog if it exists
-        existing_catalog = {}
-        if CATALOG_FILE.exists():
-          try:
-            with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
-              catalog_data = json.load(f)
-              existing_catalog = {item['slug']: item for item in catalog_data}
-              print(f"Loaded existing catalog with {len(existing_catalog)} entries")
-          except Exception as e:
-            print(f"Warning: couldn't load existing catalog: {e}")
-
-        # Collect all current items (memos + notebooks)
-        current_items = []
-
-        # Process LaTeX memos
-        if MEMOS_DIR.exists():
-          for memo_dir in sorted(MEMOS_DIR.iterdir()):
-            if not memo_dir.is_dir():
-              continue
-            
-            tex_files = list(memo_dir.glob("*.tex"))
-            if not tex_files:
-              continue
-            
-            tex_path = tex_files[0]
-            slug = f"memo-{memo_dir.name}"
-            
-            if slug in existing_catalog:
-              memo_number = existing_catalog[slug]['number']
-              first_commit = existing_catalog[slug]['first_commit_date']
-              print(f"Memo {slug} keeps existing number: {memo_number}")
-            else:
-              first_commit = git_first_commit_date(memo_dir)
-              memo_number = None
-              print(f"New memo {slug} with first commit: {first_commit}")
-            
-            metadata = parse_latex_metadata(tex_path)
-            
-            current_items.append({
-              "slug": slug,
-              "memo_dir_name": memo_dir.name,
-              "title": metadata["title"],
-              "authors": metadata["authors"],
-              "tags": metadata["tags"],
-              "summary": metadata["summary"],
-              "first_commit_date": first_commit,
-              "number": memo_number,
-              "kind": "memo"
-            })
-
-        # Process Jupyter notebooks
-        if NOTEBOOKS_DIR.exists():
-          for ipynb in sorted(NOTEBOOKS_DIR.glob("*.ipynb")):
-            try:
-              nb = nbformat.read(str(ipynb), as_version=4)
-            except Exception:
-              nb = None
-
-            slug = f"notebook-{ipynb.stem}"
-            
-            if slug in existing_catalog:
-              memo_number = existing_catalog[slug]['number']
-              first_commit = existing_catalog[slug]['first_commit_date']
-              print(f"Notebook {slug} keeps existing number: {memo_number}")
-            else:
-              first_commit = git_first_commit_date(ipynb)
-              memo_number = None
-              print(f"New notebook {slug} with first commit: {first_commit}")
-
-            title = None
-            authors = []
-            tags = []
-            summary = ""
-
-            if nb:
-              title = (nb.metadata.get("title") or first_markdown_h1(nb) or ipynb.stem).strip()
-              authors = meta_list(nb.metadata, "authors")
-              tags = meta_list(nb.metadata, "tags")
-              summary = nb.metadata.get("summary", "")
-
-            current_items.append({
-              "slug": slug,
-              "notebook_name": ipynb.stem,
-              "title": title or ipynb.stem,
-              "authors": authors,
-              "tags": tags,
-              "summary": summary,
-              "first_commit_date": first_commit,
-              "number": memo_number,
-              "kind": "notebook"
-            })
-
-        # Separate items with and without numbers
-        numbered_items = [m for m in current_items if m['number'] is not None]
-        new_items = [m for m in current_items if m['number'] is None]
-
-        # Sort new items by first_commit_date, then alphabetically by slug
-        new_items.sort(key=lambda m: (m['first_commit_date'], m['slug']))
-
-        # Assign numbers to new items
-        if numbered_items:
-          next_number = max(m['number'] for m in numbered_items) + 1
-        else:
-          next_number = 1
-
-        for item in new_items:
-          item['number'] = next_number
-          print(f"Assigned number {next_number} to {item['slug']}")
-          next_number += 1
-
-        # Combine all items and sort by number
-        all_items = numbered_items + new_items
-        all_items.sort(key=lambda m: m['number'])
-
-        # Save catalog
-        CATALOG_FILE.parent.mkdir(parents=True, exist_ok=True)
-        with open(CATALOG_FILE, "w", encoding="utf-8") as f:
-          json.dump(all_items, f, indent=2, ensure_ascii=False)
-        print(f"Wrote {CATALOG_FILE} with {len(all_items)} items")
-        PY
-
-    - name: Generate docs/memos.json from catalog
-      run: |
-        python - <<'PY'
-        import json
-        from pathlib import Path
-        import subprocess
-        from datetime import datetime, timezone
-
-        REPO = Path(".").resolve()
-        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
-        MANIFEST = REPO / "docs" / "memos.json"
-
-        def git_last_modified(path: Path) -> str:
-          """Get the date of the LAST modification"""
-          try:
-            iso = subprocess.check_output(
-              ["git", "log", "-1", "--format=%cI", "--", str(path)],
-              text=True
-            ).strip()
-            return iso or datetime.now(timezone.utc).isoformat()
-          except Exception:
-            return datetime.now(timezone.utc).isoformat()
-
-        # Load catalog
-        with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
-          catalog = json.load(f)
-
-        print(f"Loaded catalog with {len(catalog)} total items")
-
-        # Create memos.json - only include memo kind
-        items = []
-        for item in catalog:
-          if item['kind'] == 'memo':
-            memo_dir = REPO / "memos" / item['memo_dir_name']
-            pdf_name = item['memo_dir_name'] + ".pdf"
-            
-            memo_item = {
-              "slug": item['slug'],
-              "number": item['number'],
-              "title": item['title'],
-              "date": git_last_modified(memo_dir) if memo_dir.exists() else item['first_commit_date'],
-              "first_commit_date": item['first_commit_date'],
-              "authors": item['authors'],
-              "tags": item['tags'],
-              "pdf": f"/pdfs/{pdf_name}",
-              "summary": item['summary'],
-              "kind": "memo"
-            }
-            items.append(memo_item)
-            print(f"Added memo #{item['number']}: {item['title']} with tags: {item['tags']}")
-
-        with open(MANIFEST, "w", encoding="utf-8") as f:
-          json.dump(items, f, indent=2, ensure_ascii=False)
-        print(f"Wrote {MANIFEST} with {len(items)} memos")
-        PY
-
-    - name: Generate docs/notebooks.json from catalog
-      run: |
-        python - <<'PY'
-        import json
-        from pathlib import Path
-        import subprocess
-        from datetime import datetime, timezone
-
-        REPO = Path(".").resolve()
-        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
-        MANIFEST = REPO / "docs" / "notebooks.json"
-
-        def git_last_modified(path: Path) -> str:
-          """Get the date of the LAST modification"""
-          try:
-            iso = subprocess.check_output(
-              ["git", "log", "-1", "--format=%cI", "--", str(path)],
-              text=True
-            ).strip()
-            return iso or datetime.now(timezone.utc).isoformat()
-          except Exception:
-            return datetime.now(timezone.utc).isoformat()
-
-        # Load catalog
-        with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
-          catalog = json.load(f)
-
-        print(f"Loaded catalog with {len(catalog)} total items")
-        
-        # Create notebooks.json - only include notebook kind
-        items = []
-        for item in catalog:
-          if item['kind'] == 'notebook':
-            notebook_path = REPO / "notebooks" / f"{item['notebook_name']}.ipynb"
-            href = f"/notebooks/{item['notebook_name']}.html"
-            
-            notebook_item = {
-              "slug": item['slug'],
-              "number": item['number'],
-              "title": item['title'],
-              "date": git_last_modified(notebook_path) if notebook_path.exists() else item['first_commit_date'],
-              "first_commit_date": item['first_commit_date'],
-              "authors": item['authors'],
-              "tags": item['tags'],
-              "href": href,
-              "source": f"/notebooks/{item['notebook_name']}.ipynb",
-              "summary": item['summary'],
-              "kind": "notebook"
-            }
-            items.append(notebook_item)
-            print(f"Added notebook #{item['number']}: {item['title']}")
-
-        with open(MANIFEST, "w", encoding="utf-8") as f:
-          json.dump(items, f, indent=2, ensure_ascii=False)
-        print(f"Wrote {MANIFEST} with {len(items)} notebooks")
-        PY
-
-    - name: Upload artifacts for review
+    - name: Upload PR check artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifacts
-        path: |
-          docs/pdfs/*.pdf
-          docs/notebooks/*.html
-          docs/notebooks.json
-          docs/memos.json
-          docs/memo_catalog.json
+        name: pr-check-outputs
+        path: docs/pr_check/*
         if-no-files-found: ignore
+
+    - name: Commit PR check files to branch
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add docs/pr_check
+        git commit -m "Add PR check outputs (PDFs and HTML)" || echo "No changes to commit"
+        git push origin HEAD:${{ github.head_ref }}
