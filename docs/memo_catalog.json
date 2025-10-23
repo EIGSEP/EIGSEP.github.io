@@ -99,5 +99,22 @@
     "first_commit_date": "2025-10-22T16:18:59-07:00",
     "number": 6,
     "kind": "notebook"
+  },
+  {
+    "slug": "memo-system_setup_meas",
+    "memo_dir_name": "system_setup_meas",
+    "title": "Basic System Setup for Measurement",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Hardware",
+      "Software",
+      "Lab Test"
+    ],
+    "summary": "A diagram of the hardware system as set up in the field, and how to get started with running a manual internal calibration cycle.",
+    "first_commit_date": "2025-10-23T17:53:34.411139+00:00",
+    "number": 7,
+    "kind": "memo"
   }
 ]
