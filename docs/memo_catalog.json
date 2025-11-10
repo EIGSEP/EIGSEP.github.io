@@ -116,5 +116,22 @@
     "first_commit_date": "2025-10-23T18:27:16.839454+00:00",
     "number": 8,
     "kind": "memo"
+  },
+  {
+    "slug": "notebook-EIGSEP_Find_Site",
+    "notebook_name": "EIGSEP_Find_Site",
+    "title": "EIGSEP MEMO: Transmitters, Cities, and Canyons in the Western US",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Deployments",
+      "Software",
+      "Site"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-11-10T11:35:19-08:00",
+    "number": 9,
+    "kind": "notebook"
   }
 ]

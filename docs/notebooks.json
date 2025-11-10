@@ -72,5 +72,24 @@
     "source": "/notebooks/suspension_and_horizon_modeling.ipynb",
     "summary": "",
     "kind": "notebook"
+  },
+  {
+    "slug": "notebook-EIGSEP_Find_Site",
+    "number": 9,
+    "title": "EIGSEP MEMO: Transmitters, Cities, and Canyons in the Western US",
+    "date": "2025-11-10T11:35:19-08:00",
+    "first_commit_date": "2025-11-10T11:35:19-08:00",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Deployments",
+      "Software",
+      "Site"
+    ],
+    "href": "/notebooks/EIGSEP_Find_Site.html",
+    "source": "/notebooks/EIGSEP_Find_Site.ipynb",
+    "summary": "",
+    "kind": "notebook"
   }
 ]
