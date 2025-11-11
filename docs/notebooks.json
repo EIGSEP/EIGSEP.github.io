@@ -91,5 +91,22 @@
     "source": "/notebooks/EIGSEP_Find_Site.ipynb",
     "summary": "",
     "kind": "notebook"
+  },
+  {
+    "slug": "notebook-EIGSEP_terrain_reflection",
+    "number": 10,
+    "title": "Modeling interference patterns in EIGSEP spectra resulting from multipath reflections in the canyon",
+    "date": "2025-11-11T11:48:18-08:00",
+    "first_commit_date": "2025-11-11T11:48:18-08:00",
+    "authors": [],
+    "tags": [
+      "simulation",
+      "reflections",
+      "site"
+    ],
+    "href": "/notebooks/EIGSEP_terrain_reflection.html",
+    "source": "/notebooks/EIGSEP_terrain_reflection.ipynb",
+    "summary": "",
+    "kind": "notebook"
   }
 ]
