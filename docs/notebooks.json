@@ -96,9 +96,11 @@
     "slug": "notebook-EIGSEP_terrain_reflection",
     "number": 10,
     "title": "Modeling interference patterns in EIGSEP spectra resulting from multipath reflections in the canyon",
-    "date": "2025-11-11T11:48:18-08:00",
+    "date": "2025-11-11T11:52:24-08:00",
     "first_commit_date": "2025-11-11T11:48:18-08:00",
-    "authors": [],
+    "authors": [
+      "Aaron R. Parsons"
+    ],
     "tags": [
       "simulation",
       "reflections",
