@@ -110,5 +110,24 @@
     "source": "/notebooks/EIGSEP_terrain_reflection.ipynb",
     "summary": "",
     "kind": "notebook"
+  },
+  {
+    "slug": "notebook-buck_converter_EMI",
+    "number": 11,
+    "title": "Testing DC rail EMI Coupling on Buck Converters",
+    "date": "2025-12-22T22:02:46-08:00",
+    "first_commit_date": "2025-12-22T22:02:46-08:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Buck Converter",
+      "EMI",
+      "Lab Test"
+    ],
+    "href": "/notebooks/buck_converter_EMI.html",
+    "source": "/notebooks/buck_converter_EMI.ipynb",
+    "summary": "",
+    "kind": "notebook"
   }
 ]
