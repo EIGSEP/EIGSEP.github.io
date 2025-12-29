@@ -129,5 +129,25 @@
     "source": "/notebooks/buck_converter_EMI.ipynb",
     "summary": "",
     "kind": "notebook"
+  },
+  {
+    "slug": "notebook-noise_source_EMI",
+    "number": 12,
+    "title": "Identifying Noise Source EMI Fix",
+    "date": "2025-12-28T21:13:58-08:00",
+    "first_commit_date": "2025-12-28T21:13:58-08:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Noise Source",
+      "Hardware",
+      "Lab Test",
+      "EMI"
+    ],
+    "href": "/notebooks/noise_source_EMI.html",
+    "source": "/notebooks/noise_source_EMI.ipynb",
+    "summary": "",
+    "kind": "notebook"
   }
 ]

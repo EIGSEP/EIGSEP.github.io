@@ -167,5 +167,23 @@
     "first_commit_date": "2025-12-22T22:02:46-08:00",
     "number": 11,
     "kind": "notebook"
+  },
+  {
+    "slug": "notebook-noise_source_EMI",
+    "notebook_name": "noise_source_EMI",
+    "title": "Identifying Noise Source EMI Fix",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Noise Source",
+      "Hardware",
+      "Lab Test",
+      "EMI"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-12-28T21:13:58-08:00",
+    "number": 12,
+    "kind": "notebook"
   }
 ]

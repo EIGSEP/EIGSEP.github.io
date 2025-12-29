@@ -3,7 +3,7 @@
     "slug": "memo-Switches_VNA_software",
     "number": 4,
     "title": "Switches and VNA Software for Automation",
-    "date": "2025-12-23T06:05:29.465261+00:00",
+    "date": "2025-12-29T05:19:08.048421+00:00",
     "first_commit_date": "2025-10-18T00:17:00.283363+00:00",
     "authors": [
       "Charlie G. Tolley"
@@ -22,7 +22,7 @@
     "slug": "memo-switch_config_memo",
     "number": 5,
     "title": "Switch Configuration",
-    "date": "2025-12-23T06:05:29.467670+00:00",
+    "date": "2025-12-29T05:19:08.050556+00:00",
     "first_commit_date": "2025-10-18T00:17:00.286408+00:00",
     "authors": [
       "Charlie G. Tolley"
@@ -40,7 +40,7 @@
     "slug": "memo-system_setup",
     "number": 8,
     "title": "Basic System Setup for Measurement",
-    "date": "2025-12-23T06:05:29.470031+00:00",
+    "date": "2025-12-29T05:19:08.052621+00:00",
     "first_commit_date": "2025-10-23T18:27:16.839454+00:00",
     "authors": [
       "Charlie G. Tolley"
