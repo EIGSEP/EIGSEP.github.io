@@ -53,6 +53,30 @@ For latex memos, replace the relevant metadata in the comments at the top of the
    git commit -m "initial commit"
    git push
    ```
+
+   Or add a standalone PDF (no LaTeX source needed):
+   ```bash
+   cp path/to/your-report.pdf uploads/
+   git add uploads/your-report.pdf
+   git commit -m "add your-report PDF"
+   git push
+   ```
+
+   To add metadata for an uploaded PDF, create a JSON sidecar with the same name:
+   ```bash
+   cat > uploads/your-report.json <<EOF
+   {
+     "title": "Your Report Title",
+     "authors": ["Your Name"],
+     "tags": ["Hardware", "Lab Test"],
+     "summary": "Optional one-line description"
+   }
+   EOF
+   git add uploads/your-report.json
+   git commit -m "add metadata for your-report"
+   git push
+   ```
+   If no JSON sidecar is provided, the filename is used as the title.
    
 
 6. **Create a pull request**  
