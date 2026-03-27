@@ -7,8 +7,7 @@ on:
       - 'memos/**'
       - 'uploads/**'
       - 'notebooks/**'
-      - 'docs/notebooks.json'
-      - 'docs/assets/js/**'
+      - 'docs/assets/**'
       - 'docs/index.html'
       - '.github/workflows/ci-deploy.yml'
 
@@ -103,6 +102,7 @@ jobs:
         REPO = Path(".").resolve()
         MEMOS_DIR = REPO / "memos"
         NOTEBOOKS_DIR = REPO / "notebooks"
+        UPLOADS_DIR = REPO / "uploads"
         CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
 
         def git_first_commit_date(path: Path) -> str:
@@ -261,6 +261,41 @@ jobs:
               "kind": "notebook"
             })
 
+        # Process direct PDF uploads
+        if UPLOADS_DIR.exists():
+          for pdf in sorted(UPLOADS_DIR.glob("*.pdf")):
+            slug = f"upload-{pdf.stem}"
+
+            if slug in existing_catalog:
+              memo_number = existing_catalog[slug]['number']
+              first_commit = existing_catalog[slug]['first_commit_date']
+              print(f"Upload {slug} keeps existing number: {memo_number}")
+            else:
+              first_commit = git_first_commit_date(pdf)
+              memo_number = None
+              print(f"New upload {slug} with first commit: {first_commit}")
+
+            # Read optional JSON sidecar for metadata
+            sidecar = pdf.with_suffix(".json")
+            meta = {}
+            if sidecar.exists():
+              try:
+                meta = json.loads(sidecar.read_text(encoding="utf-8"))
+              except Exception as e:
+                print(f"Warning: couldn't parse {sidecar}: {e}")
+
+            current_items.append({
+              "slug": slug,
+              "upload_name": pdf.stem,
+              "title": meta.get("title", pdf.stem.replace("_", " ")),
+              "authors": meta.get("authors", []),
+              "tags": meta.get("tags", []),
+              "summary": meta.get("summary", ""),
+              "first_commit_date": first_commit,
+              "number": memo_number,
+              "kind": "pdf"
+            })
+
         # Separate items with and without numbers
         numbered_items = [m for m in current_items if m['number'] is not None]
         new_items = [m for m in current_items if m['number'] is None]
@@ -403,15 +438,56 @@ jobs:
         print(f"Wrote {MANIFEST} with {len(items)} notebooks")
         PY
 
-    - name: Commit generated artifacts
+    - name: Generate docs/uploads.json from catalog
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/notebooks docs/notebooks.json docs/memos.json docs/memo_catalog.json docs/pdfs
-        git commit -m "rebuild notebooks, memos, pdfs & manifests" || echo "No changes to commit"
+        python - <<'PY'
+        import json
+        from pathlib import Path
+        import subprocess
+        from datetime import datetime, timezone
 
-    - name: Push to GitHub
-      uses: ad-m/github-push-action@v0.6.0
+        REPO = Path(".").resolve()
+        CATALOG_FILE = REPO / "docs" / "memo_catalog.json"
+        MANIFEST = REPO / "docs" / "uploads.json"
+
+        def git_last_modified(path: Path) -> str:
+          try:
+            iso = subprocess.check_output(
+              ["git", "log", "-1", "--format=%cI", "--", str(path)],
+              text=True
+            ).strip()
+            return iso or datetime.now(timezone.utc).isoformat()
+          except Exception:
+            return datetime.now(timezone.utc).isoformat()
+
+        with open(CATALOG_FILE, 'r', encoding='utf-8') as f:
+          catalog = json.load(f)
+
+        items = []
+        for item in catalog:
+          if item['kind'] == 'pdf':
+            pdf_path = REPO / "uploads" / f"{item['upload_name']}.pdf"
+            items.append({
+              "slug": item['slug'],
+              "number": item['number'],
+              "title": item['title'],
+              "date": git_last_modified(pdf_path) if pdf_path.exists() else item['first_commit_date'],
+              "first_commit_date": item['first_commit_date'],
+              "authors": item['authors'],
+              "tags": item['tags'],
+              "pdf": f"/pdfs/{item['upload_name']}.pdf",
+              "summary": item['summary'],
+              "kind": "pdf"
+            })
+            print(f"Added upload #{item['number']}: {item['title']}")
+
+        with open(MANIFEST, "w", encoding="utf-8") as f:
+          json.dump(items, f, indent=2, ensure_ascii=False)
+        print(f"Wrote {MANIFEST} with {len(items)} uploads")
+        PY
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
+        publish_dir: ./docs

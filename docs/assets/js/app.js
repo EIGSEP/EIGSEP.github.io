@@ -7,7 +7,8 @@
   async function load() {
     const sources = [
       { url: '/memos.json',     kind: 'memo' },
-      { url: '/notebooks.json', kind: 'notebook' }
+      { url: '/notebooks.json', kind: 'notebook' },
+      { url: '/uploads.json',   kind: 'pdf' }
     ];
   
     try {
@@ -60,9 +61,9 @@
     if (sortMode === 'title') {
       data.sort((a,b) => a.title.localeCompare(b.title));
     } else if (sortMode === 'old') {
-      data.sort((a,b) => new Date(a.date) - new Date(b.date));
+      data.sort((a,b) => (a.number||0) - (b.number||0));
     } else {
-      data.sort((a,b) => new Date(b.date) - new Date(a.date)); // newest
+      data.sort((a,b) => (b.number||0) - (a.number||0)); // newest
     }
 
     countEl.textContent = data.length ? `${data.length} item${data.length===1?'':'s'} shown` : 'No items match your search.';
@@ -70,35 +71,20 @@
   }
 
   function toCard(m) {
-    const tags = (m.tags||[]).map(t => `<span class="tag">${escapeHTML(t)}</span>`).join('');
     const authors = (m.authors||[]).join(', ');
-    const dateFmt = m.date ? new Date(m.date).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'}) : '';
-  
-    // accept either .pdf or .href (HTML notebooks, md -> html, etc.)
-    const primaryLink = m.pdf || m.href || m.url || '#';
-    const primaryLabel = m.pdf ? 'Open PDF' : 'Open';
-  
-    // Prepend number to title if it exists
-    const displayTitle = m.number ? `#${m.number} - ${m.title}` : m.title;
-    
-    const kindBadge = m.kind
-      ? `<span class="tag">${escapeHTML(capitalize(m.kind))}</span>`
+    const dateFmt = m.first_commit_date
+      ? new Date(m.first_commit_date).toLocaleDateString(undefined, {year:'numeric', month:'short', day:'numeric'})
       : '';
-  
-    return `<li class="card">
-      <h3>${escapeHTML(displayTitle)}</h3>
-      <div class="meta">
-        ${authors ? `<span>${escapeHTML(authors)}</span>` : ''}
-        ${dateFmt ? `<span>· ${dateFmt}</span>` : ''}
-      </div>
-      <div class="tags">
-        ${kindBadge}
-        ${tags}
-      </div>
-      <div class="actions">
-        <a class="btn" href="${encodeURI(primaryLink)}" target="_blank" rel="noopener">${primaryLabel}</a>
-        ${m.code ? `<a class="btn secondary" href="${encodeURI(m.code)}" target="_blank" rel="noopener">Code</a>` : ''}
-      </div>
+
+    const primaryLink = m.pdf || m.href || m.url || '#';
+    const displayTitle = m.number ? `#${m.number} \u2013 ${m.title}` : m.title;
+    const kindLabel = m.kind ? capitalize(m.kind) : '';
+
+    return `<li class="memo-row">
+      <a class="memo-link" href="${encodeURI(primaryLink)}" target="_blank" rel="noopener">
+        <span class="memo-title">${escapeHTML(displayTitle)}</span>
+        <span class="memo-meta">${escapeHTML(authors)}${dateFmt ? ' \u00b7 ' + dateFmt : ''}${kindLabel ? ' \u00b7 ' + escapeHTML(kindLabel) : ''}</span>
+      </a>
     </li>`;
   }
   
