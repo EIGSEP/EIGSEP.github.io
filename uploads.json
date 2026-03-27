@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "slug": "upload-s11_reflection_memo",
+    "number": 13,
+    "title": "s11 reflection memo",
+    "date": "2026-03-27T15:40:28-07:00",
+    "first_commit_date": "2026-03-27T15:40:28-07:00",
+    "authors": [],
+    "tags": [],
+    "pdf": "/pdfs/s11_reflection_memo.pdf",
+    "summary": "",
+    "kind": "pdf"
+  }
+]
