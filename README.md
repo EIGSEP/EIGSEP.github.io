@@ -62,7 +62,7 @@ For latex memos, replace the relevant metadata in the comments at the top of the
    git push
    ```
 
-   To add metadata for an uploaded PDF, create a JSON sidecar with the same name:
+   Title and author are automatically extracted from the PDF metadata (standard for LaTeX-compiled PDFs using `hyperref`). To override or add tags, create a JSON sidecar with the same name:
    ```bash
    cat > uploads/your-report.json <<EOF
    {
@@ -76,7 +76,7 @@ For latex memos, replace the relevant metadata in the comments at the top of the
    git commit -m "add metadata for your-report"
    git push
    ```
-   If no JSON sidecar is provided, the filename is used as the title.
+   The JSON sidecar takes priority over PDF metadata. If neither is available, the filename is used as the title.
    
 
 6. **Create a pull request**  

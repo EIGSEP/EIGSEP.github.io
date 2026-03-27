@@ -79,7 +79,7 @@ jobs:
     - name: Install nbconvert toolchain
       run: |
         python -m pip install --upgrade pip
-        pip install nbconvert==7.* nbformat==5.* jinja2==3.* pygments==2.* pandocfilters
+        pip install nbconvert==7.* nbformat==5.* jinja2==3.* pygments==2.* pandocfilters pypdf==4.*
 
     - name: Convert .ipynb to HTML
       run: |
@@ -98,6 +98,7 @@ jobs:
         from datetime import datetime, timezone
         from pathlib import Path
         import nbformat
+        from pypdf import PdfReader
 
         REPO = Path(".").resolve()
         MEMOS_DIR = REPO / "memos"
@@ -152,6 +153,25 @@ jobs:
             print(f"Warning: couldn't parse {tex_path}: {e}")
           
           return metadata
+
+        def parse_pdf_metadata(pdf_path: Path):
+          """Extract title and authors from PDF document metadata."""
+          meta = {}
+          try:
+            reader = PdfReader(str(pdf_path))
+            info = reader.metadata
+            if info:
+              if info.title and info.title.strip():
+                meta["title"] = info.title.strip()
+              if info.author and info.author.strip():
+                raw = info.author.strip()
+                meta["authors"] = [a.strip() for a in re.split(r'[;,]|\sand\s', raw) if a.strip()]
+              if info.subject and info.subject.strip():
+                meta["summary"] = info.subject.strip()
+              print(f"PDF metadata for {pdf_path.name}: title={meta.get('title')}, authors={meta.get('authors')}")
+          except Exception as e:
+            print(f"Warning: couldn't read PDF metadata from {pdf_path}: {e}")
+          return meta
 
         def first_markdown_h1(nb):
           for cell in nb.cells:
@@ -275,7 +295,7 @@ jobs:
               memo_number = None
               print(f"New upload {slug} with first commit: {first_commit}")
 
-            # Read optional JSON sidecar for metadata
+            # Read metadata: JSON sidecar > PDF metadata > filename fallback
             sidecar = pdf.with_suffix(".json")
             meta = {}
             if sidecar.exists():
@@ -283,6 +303,9 @@ jobs:
                 meta = json.loads(sidecar.read_text(encoding="utf-8"))
               except Exception as e:
                 print(f"Warning: couldn't parse {sidecar}: {e}")
+
+            if not meta:
+              meta = parse_pdf_metadata(pdf)
 
             current_items.append({
               "slug": slug,
