@@ -1,0 +1,189 @@
+[
+  {
+    "slug": "notebook-antenna_s11_memo",
+    "notebook_name": "antenna_s11_memo",
+    "title": "Lab Test of Antenna S11",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-09-26T09:27:08-07:00",
+    "number": 1,
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-voltage_dependencies",
+    "notebook_name": "voltage_dependencies",
+    "title": "Voltage Dependencies of Noise Source and LNA",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "Hardware"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-09-26T09:27:08-07:00",
+    "number": 2,
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-cable_sparams",
+    "notebook_name": "cable_sparams",
+    "title": "in-lab cable s-parameter measurements",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S-parameters",
+      "Lab Test"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-16T15:06:15-07:00",
+    "number": 3,
+    "kind": "notebook"
+  },
+  {
+    "slug": "memo-Switches_VNA_software",
+    "memo_dir_name": "Switches_VNA_software",
+    "title": "Switches and VNA Software for Automation",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "VNA",
+      "Switching",
+      "Automation",
+      "Software"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-18T00:17:00.283363+00:00",
+    "number": 4,
+    "kind": "memo"
+  },
+  {
+    "slug": "memo-switch_config_memo",
+    "memo_dir_name": "switch_config_memo",
+    "title": "Switch Configuration",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "VNA",
+      "Hardware",
+      "Automation"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-18T00:17:00.286408+00:00",
+    "number": 5,
+    "kind": "memo"
+  },
+  {
+    "slug": "notebook-suspension_and_horizon_modeling",
+    "notebook_name": "suspension_and_horizon_modeling",
+    "title": "EIGSEP Suspension and Horizon Modeling",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Suspension",
+      "Horizons"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-10-22T16:18:59-07:00",
+    "number": 6,
+    "kind": "notebook"
+  },
+  {
+    "slug": "memo-system_setup",
+    "memo_dir_name": "system_setup",
+    "title": "Basic System Setup for Measurement",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Hardware",
+      "Software",
+      "Lab Test"
+    ],
+    "summary": "A diagram of the hardware system as set up in the field, and how to get started with running a manual internal calibration cycle.",
+    "first_commit_date": "2025-10-23T18:27:16.839454+00:00",
+    "number": 8,
+    "kind": "memo"
+  },
+  {
+    "slug": "notebook-EIGSEP_Find_Site",
+    "notebook_name": "EIGSEP_Find_Site",
+    "title": "EIGSEP MEMO: Transmitters, Cities, and Canyons in the Western US",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Deployments",
+      "Software",
+      "Site"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-11-10T11:35:19-08:00",
+    "number": 9,
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-EIGSEP_terrain_reflection",
+    "notebook_name": "EIGSEP_terrain_reflection",
+    "title": "Modeling interference patterns in EIGSEP spectra resulting from multipath reflections in the canyon",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "simulation",
+      "reflections",
+      "site"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-11-11T11:48:18-08:00",
+    "number": 10,
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-buck_converter_EMI",
+    "notebook_name": "buck_converter_EMI",
+    "title": "Testing DC rail EMI Coupling on Buck Converters",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Buck Converter",
+      "EMI",
+      "Lab Test"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-12-22T22:02:46-08:00",
+    "number": 11,
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-noise_source_EMI",
+    "notebook_name": "noise_source_EMI",
+    "title": "Identifying Noise Source EMI Fix",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Noise Source",
+      "Hardware",
+      "Lab Test",
+      "EMI"
+    ],
+    "summary": "",
+    "first_commit_date": "2025-12-28T21:13:58-08:00",
+    "number": 12,
+    "kind": "notebook"
+  }
+]

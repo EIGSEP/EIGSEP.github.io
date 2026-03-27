@@ -1,0 +1,13 @@
+title: EIGSEP
+theme: minima
+plugins: [jekyll‐feed]
+defaults:
+  - scope:
+      path: "pdfs"
+      type: "static_file"
+    values:
+      layout: nil
+
+# Optional: enable permalinks
+permalink: /:path/
+

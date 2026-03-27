@@ -1,0 +1,153 @@
+[
+  {
+    "slug": "notebook-antenna_s11_memo",
+    "number": 1,
+    "title": "Lab Test of Antenna S11",
+    "date": "2025-09-26T12:10:03-07:00",
+    "first_commit_date": "2025-09-26T09:27:08-07:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test"
+    ],
+    "href": "/notebooks/antenna_s11_memo.html",
+    "source": "/notebooks/antenna_s11_memo.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-voltage_dependencies",
+    "number": 2,
+    "title": "Voltage Dependencies of Noise Source and LNA",
+    "date": "2025-09-26T12:10:03-07:00",
+    "first_commit_date": "2025-09-26T09:27:08-07:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "Hardware"
+    ],
+    "href": "/notebooks/voltage_dependencies.html",
+    "source": "/notebooks/voltage_dependencies.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-cable_sparams",
+    "number": 3,
+    "title": "in-lab cable s-parameter measurements",
+    "date": "2025-10-16T15:46:17-07:00",
+    "first_commit_date": "2025-10-16T15:06:15-07:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S-parameters",
+      "Lab Test"
+    ],
+    "href": "/notebooks/cable_sparams.html",
+    "source": "/notebooks/cable_sparams.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-suspension_and_horizon_modeling",
+    "number": 6,
+    "title": "EIGSEP Suspension and Horizon Modeling",
+    "date": "2025-10-22T16:23:15-07:00",
+    "first_commit_date": "2025-10-22T16:18:59-07:00",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Suspension",
+      "Horizons"
+    ],
+    "href": "/notebooks/suspension_and_horizon_modeling.html",
+    "source": "/notebooks/suspension_and_horizon_modeling.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-EIGSEP_Find_Site",
+    "number": 9,
+    "title": "EIGSEP MEMO: Transmitters, Cities, and Canyons in the Western US",
+    "date": "2025-11-10T11:35:19-08:00",
+    "first_commit_date": "2025-11-10T11:35:19-08:00",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "Deployments",
+      "Software",
+      "Site"
+    ],
+    "href": "/notebooks/EIGSEP_Find_Site.html",
+    "source": "/notebooks/EIGSEP_Find_Site.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-EIGSEP_terrain_reflection",
+    "number": 10,
+    "title": "Modeling interference patterns in EIGSEP spectra resulting from multipath reflections in the canyon",
+    "date": "2025-11-11T11:52:24-08:00",
+    "first_commit_date": "2025-11-11T11:48:18-08:00",
+    "authors": [
+      "Aaron R. Parsons"
+    ],
+    "tags": [
+      "simulation",
+      "reflections",
+      "site"
+    ],
+    "href": "/notebooks/EIGSEP_terrain_reflection.html",
+    "source": "/notebooks/EIGSEP_terrain_reflection.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-buck_converter_EMI",
+    "number": 11,
+    "title": "Testing DC rail EMI Coupling on Buck Converters",
+    "date": "2025-12-22T22:02:46-08:00",
+    "first_commit_date": "2025-12-22T22:02:46-08:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Buck Converter",
+      "EMI",
+      "Lab Test"
+    ],
+    "href": "/notebooks/buck_converter_EMI.html",
+    "source": "/notebooks/buck_converter_EMI.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-noise_source_EMI",
+    "number": 12,
+    "title": "Identifying Noise Source EMI Fix",
+    "date": "2025-12-28T21:13:58-08:00",
+    "first_commit_date": "2025-12-28T21:13:58-08:00",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Noise Source",
+      "Hardware",
+      "Lab Test",
+      "EMI"
+    ],
+    "href": "/notebooks/noise_source_EMI.html",
+    "source": "/notebooks/noise_source_EMI.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  }
+]
