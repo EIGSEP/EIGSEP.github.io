@@ -199,5 +199,18 @@
     "first_commit_date": "2026-03-27T15:40:28-07:00",
     "number": 13,
     "kind": "pdf"
+  },
+  {
+    "slug": "memo-snap_linearity",
+    "memo_dir_name": "snap_linearity",
+    "title": "SNAP Linearity",
+    "authors": [
+      "Christian H. Bye"
+    ],
+    "tags": [],
+    "summary": "",
+    "first_commit_date": "2026-04-07T03:14:15.316213+00:00",
+    "number": 14,
+    "kind": "memo"
   }
 ]
