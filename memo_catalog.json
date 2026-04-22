@@ -201,6 +201,19 @@
     "kind": "pdf"
   },
   {
+    "slug": "memo-battery_memo",
+    "memo_dir_name": "battery_memo",
+    "title": "EIGSEP Battery Configuration and Setup",
+    "authors": [
+      "Richard Rodriguez"
+    ],
+    "tags": [],
+    "summary": "",
+    "first_commit_date": "2026-04-22T21:41:53.966192+00:00",
+    "number": 14,
+    "kind": "memo"
+  },
+  {
     "slug": "memo-snap_linearity",
     "memo_dir_name": "snap_linearity",
     "title": "SNAP Linearity",
@@ -209,8 +222,8 @@
     ],
     "tags": [],
     "summary": "",
-    "first_commit_date": "2026-04-07T03:14:15.316213+00:00",
-    "number": 14,
+    "first_commit_date": "2026-04-22T21:41:53.969160+00:00",
+    "number": 15,
     "kind": "memo"
   }
 ]
