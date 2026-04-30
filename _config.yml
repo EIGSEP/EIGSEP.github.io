@@ -11,3 +11,5 @@ defaults:
 # Optional: enable permalinks
 permalink: /:path/
 
+header_pages:
+  - software/index.md

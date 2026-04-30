@@ -1,0 +1,7 @@
+# Git ref used for every outbound link from /software/ to eigsep-field.
+# At release time, the release-coordination checklist flips this to the
+# new release tag (e.g. v2026.5.0). Between releases, tracking main is
+# acceptable because eigsep-field's docs-drift CI keeps interface docs
+# honest on every commit.
+tag: main
+repo_url: https://github.com/EIGSEP/eigsep-field
