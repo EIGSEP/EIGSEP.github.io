@@ -1,6 +1,5 @@
 title: EIGSEP
 theme: minima
-plugins: [jekyll‐feed]
 defaults:
   - scope:
       path: "pdfs"
