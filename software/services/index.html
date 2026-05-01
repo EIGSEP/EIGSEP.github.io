@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Services | EIGSEP</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="Services" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:site_name" content="EIGSEP" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Services" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","headline":"Services","url":"/software/services/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="/feed.xml" title="EIGSEP" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">EIGSEP</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/software/">Software</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Services</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="services">Services</h1>
+
+<p>Systemd services on the EIGSEP Pi image are declared in
+<code class="language-plaintext highlighter-rouge">eigsep-field/manifest.toml</code> under <code class="language-plaintext highlighter-rouge">[services.*]</code>. The image build,
+<code class="language-plaintext highlighter-rouge">eigsep-field doctor</code>, and <code class="language-plaintext highlighter-rouge">eigsep-field services list</code> are all
+driven from that table — there is no parallel list to maintain.</p>
+
+<p>Tracking
+<a href="https://github.com/EIGSEP/eigsep-field/tree/main"><code class="language-plaintext highlighter-rouge">eigsep-field@main</code></a>.</p>
+
+<h2 id="whats-there">What’s there</h2>
+
+<ul>
+  <li><a href="https://github.com/EIGSEP/eigsep-field/blob/main/manifest.toml">Manifest service table</a>
+— each service’s <code class="language-plaintext highlighter-rouge">kind</code> (apt / local / sibling), <code class="language-plaintext highlighter-rouge">unit</code>,
+<code class="language-plaintext highlighter-rouge">activation</code> (always / role), and <code class="language-plaintext highlighter-rouge">role</code> (panda / backend /
+dhcp-master).</li>
+  <li><a href="https://github.com/EIGSEP/eigsep-field/blob/main/docs/interface/README.md#systemd-services">Systemd services index</a>
+— sibling-owned units with permalinked authority + drift tracking.</li>
+</ul>
+
+<h2 id="how-a-service-gets-enabled">How a service gets enabled</h2>
+
+<p>Every Pi enables the <code class="language-plaintext highlighter-rouge">activation = "always"</code> services at image build.
+Per-Pi role services (<code class="language-plaintext highlighter-rouge">activation = "role"</code>) are enabled on first
+boot by <code class="language-plaintext highlighter-rouge">eigsep-first-boot.service</code> based on
+<code class="language-plaintext highlighter-rouge">/boot/eigsep-role.conf</code>. The role’s <code class="language-plaintext highlighter-rouge">.target</code> (<code class="language-plaintext highlighter-rouge">eigsep-panda.target</code>,
+<code class="language-plaintext highlighter-rouge">eigsep-backend.target</code>, <code class="language-plaintext highlighter-rouge">eigsep-dhcp.target</code>) is what <code class="language-plaintext highlighter-rouge">Wants=</code> the
+role-specific units.</p>
+
+<p>For sibling-owned units, <code class="language-plaintext highlighter-rouge">scripts/check_services_drift.py</code> enforces
+that the unit file shipped inside the image still matches its
+upstream source at the manifest-pinned tag — CI fails on drift.</p>
+
+<h2 id="adding-a-service">Adding a service</h2>
+
+<p>The procedure (manifest entry + unit file + role target update +
+drift check) lives in
+<a href="https://github.com/EIGSEP/eigsep-field/blob/main/CLAUDE.md"><code class="language-plaintext highlighter-rouge">eigsep-field/CLAUDE.md</code></a>
+under “When adding a systemd service to the image”.</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">EIGSEP</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">EIGSEP</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p></p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

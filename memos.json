@@ -3,7 +3,7 @@
     "slug": "memo-Switches_VNA_software",
     "number": 4,
     "title": "Switches and VNA Software for Automation",
-    "date": "2026-04-30T18:57:09.252270+00:00",
+    "date": "2026-05-01T16:31:52.939728+00:00",
     "first_commit_date": "2025-10-18T00:17:00.283363+00:00",
     "authors": [
       "Charlie G. Tolley"
@@ -22,7 +22,7 @@
     "slug": "memo-switch_config_memo",
     "number": 5,
     "title": "Switch Configuration",
-    "date": "2026-04-30T18:57:09.254684+00:00",
+    "date": "2026-05-01T16:31:52.942525+00:00",
     "first_commit_date": "2025-10-18T00:17:00.286408+00:00",
     "authors": [
       "Charlie G. Tolley"
@@ -40,7 +40,7 @@
     "slug": "memo-system_setup",
     "number": 8,
     "title": "Basic System Setup for Measurement",
-    "date": "2026-04-30T18:57:09.256992+00:00",
+    "date": "2026-05-01T16:31:52.945308+00:00",
     "first_commit_date": "2025-10-23T18:27:16.839454+00:00",
     "authors": [
       "Charlie G. Tolley"
@@ -58,8 +58,8 @@
     "slug": "memo-battery_memo",
     "number": 14,
     "title": "EIGSEP Battery Configuration and Setup",
-    "date": "2026-04-30T18:57:09.259305+00:00",
-    "first_commit_date": "2026-04-30T18:57:09.067050+00:00",
+    "date": "2026-05-01T16:31:52.948066+00:00",
+    "first_commit_date": "2026-05-01T16:31:52.732975+00:00",
     "authors": [
       "Richard Rodriguez"
     ],
@@ -72,8 +72,8 @@
     "slug": "memo-snap_linearity",
     "number": 15,
     "title": "SNAP Linearity",
-    "date": "2026-04-30T18:57:09.261500+00:00",
-    "first_commit_date": "2026-04-30T18:57:09.069866+00:00",
+    "date": "2026-05-01T16:31:52.950793+00:00",
+    "first_commit_date": "2026-05-01T16:31:52.736144+00:00",
     "authors": [
       "Christian H. Bye"
     ],
