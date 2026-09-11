@@ -216,7 +216,7 @@
   {
     "slug": "notebook-field_s11_cal_memo",
     "notebook_name": "field_s11_cal_memo",
-    "title": "Field S11s at each cal plane",
+    "title": "Using S11 Class: Reading Calibrated Field S11",
     "authors": [
       "Charlie G. Tolley"
     ],
@@ -239,7 +239,7 @@
     ],
     "tags": [],
     "summary": "",
-    "first_commit_date": "2026-09-11T02:18:21.165890+00:00",
+    "first_commit_date": "2026-09-11T02:23:30.853171+00:00",
     "number": 16,
     "kind": "memo"
   }
