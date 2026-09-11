@@ -214,6 +214,23 @@
     "kind": "memo"
   },
   {
+    "slug": "notebook-field_s11_cal_memo",
+    "notebook_name": "field_s11_cal_memo",
+    "title": "Field S11s at each cal plane",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test"
+    ],
+    "summary": "",
+    "first_commit_date": "2026-09-11T02:10:02Z",
+    "number": 15,
+    "kind": "notebook"
+  },
+  {
     "slug": "memo-snap_linearity",
     "memo_dir_name": "snap_linearity",
     "title": "SNAP Linearity",
@@ -222,8 +239,8 @@
     ],
     "tags": [],
     "summary": "",
-    "first_commit_date": "2026-07-09T03:26:25.601756+00:00",
-    "number": 15,
+    "first_commit_date": "2026-09-11T02:18:21.165890+00:00",
+    "number": 16,
     "kind": "memo"
   }
 ]

@@ -149,5 +149,24 @@
     "source": "/notebooks/noise_source_EMI.ipynb",
     "summary": "",
     "kind": "notebook"
+  },
+  {
+    "slug": "notebook-field_s11_cal_memo",
+    "number": 15,
+    "title": "Field S11s at each cal plane",
+    "date": "2026-09-11T02:10:02Z",
+    "first_commit_date": "2026-09-11T02:10:02Z",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test"
+    ],
+    "href": "/notebooks/field_s11_cal_memo.html",
+    "source": "/notebooks/field_s11_cal_memo.ipynb",
+    "summary": "",
+    "kind": "notebook"
   }
 ]
