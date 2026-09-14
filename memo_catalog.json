@@ -35,7 +35,7 @@
   {
     "slug": "notebook-cable_sparams",
     "notebook_name": "cable_sparams",
-    "title": "in-lab cable s-parameter measurements",
+    "title": "in-lab cable s-parameter measurements (2025)",
     "authors": [
       "Charlie G. Tolley"
     ],
@@ -216,7 +216,7 @@
   {
     "slug": "notebook-field_s11_cal_memo",
     "notebook_name": "field_s11_cal_memo",
-    "title": "Using S11 Class: Reading Calibrated Field S11",
+    "title": "Reading Calibrated Field S11 (2026)",
     "authors": [
       "Charlie G. Tolley"
     ],
@@ -258,7 +258,7 @@
     ],
     "tags": [],
     "summary": "",
-    "first_commit_date": "2026-09-14T16:25:54.010685+00:00",
+    "first_commit_date": "2026-09-14T23:04:49.165433+00:00",
     "number": 17,
     "kind": "memo"
   }
