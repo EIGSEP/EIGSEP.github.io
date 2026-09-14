@@ -154,7 +154,7 @@
     "slug": "notebook-field_s11_cal_memo",
     "number": 15,
     "title": "Using S11 Class: Reading Calibrated Field S11",
-    "date": "2026-09-10T19:21:22-07:00",
+    "date": "2026-09-14T09:18:53-07:00",
     "first_commit_date": "2026-09-11T02:10:02Z",
     "authors": [
       "Charlie G. Tolley"
@@ -166,6 +166,27 @@
     ],
     "href": "/notebooks/field_s11_cal_memo.html",
     "source": "/notebooks/field_s11_cal_memo.ipynb",
+    "summary": "",
+    "kind": "notebook"
+  },
+  {
+    "slug": "notebook-characterizing_system_2026",
+    "number": 16,
+    "title": "Characterizing the 2026 system",
+    "date": "2026-09-12T17:33:37Z",
+    "first_commit_date": "2026-09-12T17:33:37Z",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test",
+      "System Characterization",
+      "Switches"
+    ],
+    "href": "/notebooks/characterizing_system_2026.html",
+    "source": "/notebooks/characterizing_system_2026.ipynb",
     "summary": "",
     "kind": "notebook"
   }

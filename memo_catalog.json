@@ -231,6 +231,25 @@
     "kind": "notebook"
   },
   {
+    "slug": "notebook-characterizing_system_2026",
+    "notebook_name": "characterizing_system_2026",
+    "title": "Characterizing the 2026 system",
+    "authors": [
+      "Charlie G. Tolley"
+    ],
+    "tags": [
+      "Calibration",
+      "S11",
+      "Lab Test",
+      "System Characterization",
+      "Switches"
+    ],
+    "summary": "",
+    "first_commit_date": "2026-09-12T17:33:37Z",
+    "number": 16,
+    "kind": "notebook"
+  },
+  {
     "slug": "memo-snap_linearity",
     "memo_dir_name": "snap_linearity",
     "title": "SNAP Linearity",
@@ -239,8 +258,8 @@
     ],
     "tags": [],
     "summary": "",
-    "first_commit_date": "2026-09-11T02:23:30.853171+00:00",
-    "number": 16,
+    "first_commit_date": "2026-09-14T16:25:54.010685+00:00",
+    "number": 17,
     "kind": "memo"
   }
 ]
