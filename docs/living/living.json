@@ -1,0 +1,126 @@
+{
+  "source_ref": "origin/main",
+  "source_commit": "389ef62",
+  "memos": [
+    {
+      "number": "001",
+      "slug": "memo-001-marjum-2026-07-dataset",
+      "title": "The Marjum Pass 2026-07 dataset: observations, events, geometry and conventions",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-10",
+      "summary": "The Marjum 2026-07 dataset: observation parameters, configuration history, timeline and events, combs and the transmitter, geometry and conventions",
+      "pdf": "/living/memo-001.pdf",
+      "pdf_bytes": 1746844,
+      "pdf_sha256": "542b652569dd11b3770209e6867f6df6e31a217f33a3ff25b4f2ff18c054b96d",
+      "commit": "81d5069",
+      "commit_date": "2026-10-10T05:19:30+00:00"
+    },
+    {
+      "number": "002",
+      "slug": "memo-002-marjum-2026-07-geometry",
+      "title": "Marjum Pass 2026-07: images, camera poses and positions",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-10",
+      "summary": "Marjum 2026-07 images, camera poses and positions: antenna and transmitter positions and bounds, the joint MCMC, azimuth zero and the LIDAR check",
+      "pdf": "/living/memo-002.pdf",
+      "pdf_bytes": 4947753,
+      "pdf_sha256": "b60ab6548b0c14d65d533f5b3626485b848c107198a1ca047433e6bbcb8205b3",
+      "commit": "00f468a",
+      "commit_date": "2026-10-10T05:17:52+00:00"
+    },
+    {
+      "number": "003",
+      "slug": "memo-003-marjum-2026-07-pointing",
+      "title": "Marjum Pass 2026-07: pointing",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-15",
+      "summary": "Marjum 2026-07 pointing: the roll mount and angle conventions, how the pointing table combines its sensors, the 07-17 raster, the potentiometer slip, the table's azimuth zero, elevation zero and failure, LIDAR-code fixes, table defects",
+      "pdf": "/living/memo-003.pdf",
+      "pdf_bytes": 681338,
+      "pdf_sha256": "e47dde6eba1001e9f192f314b04e36c1ad2b89e6b1cd48722e090fe4d29e3c8f",
+      "commit": "f5c8dd5",
+      "commit_date": "2026-10-16T20:11:12+00:00"
+    },
+    {
+      "number": "004",
+      "slug": "memo-004-marjum-2026-07-calibration",
+      "title": "Marjum Pass 2026-07: receiver and temperature calibration",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-05",
+      "summary": "Marjum 2026-07 receiver and temperature calibration: reference plane P, the Y factor with reflection corrections, the tcal product and its validation and coverage, the switch-file and contaminated-visit defects, the low-band failure, and the open noise-source temperature",
+      "pdf": "/living/memo-004.pdf",
+      "pdf_bytes": 455806,
+      "pdf_sha256": "8de1a3e3ea0dae8b0e6908e1da6d1392f238579c8f5723fdef62d651704df494",
+      "commit": "144e6d0",
+      "commit_date": "2026-10-05T20:31:05+00:00"
+    },
+    {
+      "number": "005",
+      "slug": "memo-005-marjum-2026-07-beam",
+      "title": "Marjum Pass 2026-07: beam reconstruction from the transmitter raster",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-08",
+      "summary": "Marjum 2026-07 beam reconstruction from the transmitter raster: tooth selection and background, the empirical beam model, geometry and handedness check, held-out scores against HFSS, noise floor",
+      "pdf": "/living/memo-005.pdf",
+      "pdf_bytes": 10862809,
+      "pdf_sha256": "9032e1957eca2b830a9e05d05044848cda08e62eb0165c1f840a87e85e7bf95e",
+      "commit": "23c1faa",
+      "commit_date": "2026-10-08T21:40:24+00:00"
+    },
+    {
+      "number": "006",
+      "slug": "memo-006-marjum-2026-07-rfi",
+      "title": "Marjum Pass 2026-07: RFI, the two combs, and flagging",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-06",
+      "summary": "Marjum 2026-07 RFI, the two combs and flagging: where the transmitter and box-air self-EMI combs are, their masks, the corrected comb names, the flag products and the v3-beta point-threshold fix",
+      "pdf": "/living/memo-006.pdf",
+      "pdf_bytes": 530064,
+      "pdf_sha256": "d62355bd41ede5b8c840367e664650bcd02c852dd54b70433dd04a018c5ec6b3",
+      "commit": "9fa2d2d",
+      "commit_date": "2026-10-06T15:05:41+00:00"
+    },
+    {
+      "number": "007",
+      "slug": "memo-007-marjum-2026-07-self-emi",
+      "title": "Marjum Pass 2026-07: the self-EMI tests, step by step",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-04",
+      "summary": "Marjum 2026-07 self-EMI tests: the four test sessions of 07-14/15 step by step, the screenshot clock (PDT), the phase-B input mapping, per-step spectra and changes, the Panda's imprint",
+      "pdf": "/living/memo-007.pdf",
+      "pdf_bytes": 8240814,
+      "pdf_sha256": "8c4e8f9b3feafd2172445cda3089fba7e8631ced34c0fa6aa60a93dce4c2a018",
+      "commit": "a875fea",
+      "commit_date": "2026-10-05T20:24:47+00:00"
+    },
+    {
+      "number": "008",
+      "slug": "memo-008-marjum-2026-07-image-domain",
+      "title": "Marjum Pass 2026-07: image-domain modeling of the sky, the ground and the Sun",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-10-09",
+      "summary": "Marjum 2026-07 image-domain modeling: the sky/ground/offset/Sun model and its degeneracies, the night fit on tcal v0003 (ground temperature not yet measurable, sky amplitude ~2), when the Sun clears the terrain, solar radio bursts in box-air matched to e-CALLISTO, the raw data at every terrain sunrise and sunset, a calibrated 07-17 excess larger than the concurrent Sun, and sky and ground recovery from the rotating antenna",
+      "pdf": "/living/memo-008.pdf",
+      "pdf_bytes": 1443835,
+      "pdf_sha256": "d0e468ccec96a0d69cd4d5aae88af9348416e3d65e733b45217c40d66ba796be",
+      "commit": "eb8ed10",
+      "commit_date": "2026-10-09T21:39:55+00:00"
+    }
+  ]
+}
