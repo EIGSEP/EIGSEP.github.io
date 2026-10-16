@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EIGSEP Living Memos</title>
+  <meta name="description" content="Living analysis memos for the EIGSEP collaboration, revised as our understanding changes" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">EIGSEP</a>
+    <nav class="nav">
+      <a href="/">Memos</a>
+      <a href="/living/" aria-current="page">Living memos</a>
+      <a href="/software/">Software</a>
+      <a href="https://github.com/EIGSEP/EIGSEP.github.io">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="content">
+  <section class="hero container" aria-labelledby="hero-title">
+    <h1 id="hero-title">EIGSEP Living Memos</h1>
+    <p class="lede">Each living memo records our current understanding of one topic and is revised in place as that understanding changes. The date shown is the memo's current version. Living memos are numbered separately from the technical memos.</p>
+    <div class="controls">
+      <input id="q" type="search" placeholder="Search title or topic…" autocomplete="off" aria-label="Search living memos" />
+    </div>
+    <p id="count" class="count" aria-live="polite"></p>
+  </section>
+
+  <section class="container" aria-labelledby="list-title">
+    <h2 id="list-title" class="visually-hidden">Living memos</h2>
+    <ul id="memo-list" class="card-list" role="list"></ul>
+    <noscript>
+      <p>This page needs JavaScript to list the memos. The list is also available as <a href="/living/living.json">living.json</a>.</p>
+    </noscript>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© <span id="year"></span> EIGSEP · <a href="https://github.com/EIGSEP/EIGSEP.github.io">View source</a></p>
+  </div>
+</footer>
+
+<script src="/assets/js/living.js" defer></script>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

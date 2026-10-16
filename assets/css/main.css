@@ -71,6 +71,7 @@ a:hover { text-decoration: underline; }
 .memo-link:hover { background: var(--card); text-decoration: none; }
 .memo-title { font-weight: 600; font-size: 1rem; line-height: 1.35; }
 .memo-meta { font-size: .85rem; color: var(--muted); }
+.memo-summary { font-size: .9rem; }
 
 .site-footer { border-top: 1px solid var(--border); }
 .footer-inner { padding: 40px 0; color: var(--muted); }
