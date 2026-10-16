@@ -81,3 +81,12 @@ For latex memos, replace the relevant metadata in the comments at the top of the
 
 6. **Create a pull request**  
    Go to the GitHub repository and create a pull request from your branch to the main branch. This will allow others to review your changes before merging them into the main branch.
+
+## Living memos
+
+The "Living memos" page (`/living/`) lists the analysis memos that are maintained
+in the EIGSEP analysis repository and revised in place. They are not built here and
+are numbered separately from the memos above. `docs/living/memo-NNN.pdf` and
+`docs/living/living.json` are written by `memos/publish_to_site.py` in that
+repository; don't edit them by hand. The page itself is `docs/living/index.html`
+with `docs/assets/js/living.js`.
