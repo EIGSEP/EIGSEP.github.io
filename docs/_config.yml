@@ -11,4 +11,5 @@ defaults:
 permalink: /:path/
 
 header_pages:
+  - living/index.html
   - software/index.md
