@@ -1,6 +1,6 @@
 {
-  "source_ref": "ebe0a80e136d921cf188332542dc4d352340518f",
-  "source_commit": "ebe0a80",
+  "source_ref": "378cb869d68d1c208b579746d995bcf35084984e",
+  "source_commit": "378cb86",
   "memos": [
     {
       "number": "001",
@@ -24,13 +24,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-10",
+      "version": "2026-10-17",
       "summary": "Marjum 2026-07 images, camera poses and positions: antenna and transmitter positions and bounds, the joint MCMC, azimuth zero and the LIDAR check",
       "pdf": "/living/memo-002.pdf",
-      "pdf_bytes": 4947753,
-      "pdf_sha256": "b60ab6548b0c14d65d533f5b3626485b848c107198a1ca047433e6bbcb8205b3",
-      "commit": "00f468a",
-      "commit_date": "2026-10-10T05:17:52+00:00"
+      "pdf_bytes": 4951666,
+      "pdf_sha256": "e0481e39c5bb2af22a0083e4df4169924bb63208dca242c16e1f64403b3c8856",
+      "commit": "ef58a1a",
+      "commit_date": "2026-10-18T05:35:33+00:00"
     },
     {
       "number": "003",
@@ -114,13 +114,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-16",
+      "version": "2026-10-18",
       "summary": "Marjum 2026-07 image-domain modeling: the sky/ground/offset/Sun model and its degeneracies, the night fit on tcal v0003 (ground temperature not yet measurable, sky amplitude ~2), when the Sun clears the terrain, solar radio bursts in box-air matched to e-CALLISTO, the raw data at every terrain sunrise and sunset, a calibrated 07-17 excess larger than the concurrent Sun, sky and ground recovery from the rotating antenna, and what the DEM's southern edge does to the horizon (DEM v0004)",
       "pdf": "/living/memo-008.pdf",
-      "pdf_bytes": 1508978,
-      "pdf_sha256": "2305b6af08370de5f582561cb7cae39a6ae73428295458147d88bb502aa6562e",
-      "commit": "c74f804",
-      "commit_date": "2026-10-16T23:05:56+00:00"
+      "pdf_bytes": 1628552,
+      "pdf_sha256": "c6889821620632c7158f17434e062c4e3cd67dfecc9483fe3e42e7f302c6313c",
+      "commit": "0a876fc",
+      "commit_date": "2026-10-18T07:01:37+00:00"
     }
   ]
 }
