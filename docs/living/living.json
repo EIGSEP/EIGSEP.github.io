@@ -1,6 +1,6 @@
 {
-  "source_ref": "378cb869d68d1c208b579746d995bcf35084984e",
-  "source_commit": "378cb86",
+  "source_ref": "bfc46013fc76eb7d17c422f9d2886bd683bdf7cd",
+  "source_commit": "bfc4601",
   "memos": [
     {
       "number": "001",
@@ -117,10 +117,10 @@
       "version": "2026-10-18",
       "summary": "Marjum 2026-07 image-domain modeling: the sky/ground/offset/Sun model and its degeneracies, the night fit on tcal v0003 (ground temperature not yet measurable, sky amplitude ~2), when the Sun clears the terrain, solar radio bursts in box-air matched to e-CALLISTO, the raw data at every terrain sunrise and sunset, a calibrated 07-17 excess larger than the concurrent Sun, sky and ground recovery from the rotating antenna, and what the DEM's southern edge does to the horizon (DEM v0004)",
       "pdf": "/living/memo-008.pdf",
-      "pdf_bytes": 1628552,
-      "pdf_sha256": "c6889821620632c7158f17434e062c4e3cd67dfecc9483fe3e42e7f302c6313c",
-      "commit": "0a876fc",
-      "commit_date": "2026-10-18T07:01:37+00:00"
+      "pdf_bytes": 1704937,
+      "pdf_sha256": "ec98b688aa474f744f2b45a0ed816e8b186879fa1b9aa670783c791778460f54",
+      "commit": "bfc4601",
+      "commit_date": "2026-10-18T20:28:47+00:00"
     }
   ]
 }
