@@ -1,6 +1,6 @@
 {
-  "source_ref": "c3b82f5f3df0a55362797d46dd7d2e4f7c964628",
-  "source_commit": "c3b82f5",
+  "source_ref": "715b7a15302005bc588f7135ce20195bc558d63b",
+  "source_commit": "715b7a1",
   "memos": [
     {
       "number": "001",
@@ -9,13 +9,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-10",
+      "version": "2026-10-17",
       "summary": "The Marjum 2026-07 dataset: observation parameters, configuration history, timeline and events, combs and the transmitter, geometry and conventions",
       "pdf": "/living/memo-001.pdf",
-      "pdf_bytes": 1746844,
-      "pdf_sha256": "542b652569dd11b3770209e6867f6df6e31a217f33a3ff25b4f2ff18c054b96d",
-      "commit": "81d5069",
-      "commit_date": "2026-10-10T05:19:30+00:00"
+      "pdf_bytes": 1780004,
+      "pdf_sha256": "648b31f156d8eb470860afb4daaab676168f1a7248cd27ccd45bbcb0c700d4c6",
+      "commit": "715b7a1",
+      "commit_date": "2026-10-21T18:30:29+00:00"
     },
     {
       "number": "002",
