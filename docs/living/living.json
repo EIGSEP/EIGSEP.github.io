@@ -1,6 +1,6 @@
 {
-  "source_ref": "85d6d85047d63853236855186c157de87b3f8156",
-  "source_commit": "85d6d85",
+  "source_ref": "3b18c8961c9c53ac10bad3af5f4afc48144fddfa",
+  "source_commit": "3b18c89",
   "memos": [
     {
       "number": "001",
@@ -39,13 +39,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-15",
+      "version": "2026-10-23",
       "summary": "Marjum 2026-07 pointing: the roll mount and angle conventions, how the pointing table combines its sensors, the 07-17 raster, the potentiometer slip, the table's azimuth zero, elevation zero and failure, LIDAR-code fixes, table defects",
       "pdf": "/living/memo-003.pdf",
-      "pdf_bytes": 681338,
-      "pdf_sha256": "e47dde6eba1001e9f192f314b04e36c1ad2b89e6b1cd48722e090fe4d29e3c8f",
-      "commit": "f5c8dd5",
-      "commit_date": "2026-10-16T20:11:12+00:00"
+      "pdf_bytes": 732029,
+      "pdf_sha256": "d2c9e6efa61d5abc7498f233c124980752956fabb66f630c672f2211d377179a",
+      "commit": "bc41508",
+      "commit_date": "2026-10-23T19:54:34+00:00"
     },
     {
       "number": "004",
@@ -54,13 +54,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-05",
+      "version": "2026-10-23",
       "summary": "Marjum 2026-07 receiver and temperature calibration: reference plane P, the Y factor with reflection corrections, the tcal product and its validation and coverage, the switch-file and contaminated-visit defects, the low-band failure, and the open noise-source temperature",
       "pdf": "/living/memo-004.pdf",
-      "pdf_bytes": 455806,
-      "pdf_sha256": "8de1a3e3ea0dae8b0e6908e1da6d1392f238579c8f5723fdef62d651704df494",
-      "commit": "144e6d0",
-      "commit_date": "2026-10-05T20:31:05+00:00"
+      "pdf_bytes": 952440,
+      "pdf_sha256": "4d2e520c94fc89ba248c3a506f8a249c897f8c7367881e1fdb7a960c4699f5e0",
+      "commit": "3b18c89",
+      "commit_date": "2026-10-24T00:18:26+00:00"
     },
     {
       "number": "005",
