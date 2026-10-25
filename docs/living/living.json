@@ -1,6 +1,6 @@
 {
-  "source_ref": "3b18c8961c9c53ac10bad3af5f4afc48144fddfa",
-  "source_commit": "3b18c89",
+  "source_ref": "6a293bc6092ef951a57c16679cd86585cc885978",
+  "source_commit": "6a293bc",
   "memos": [
     {
       "number": "001",
@@ -9,13 +9,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-17",
+      "version": "2026-10-23",
       "summary": "The Marjum 2026-07 dataset: observation parameters, configuration history, timeline and events, combs and the transmitter, geometry and conventions",
       "pdf": "/living/memo-001.pdf",
-      "pdf_bytes": 1780004,
-      "pdf_sha256": "648b31f156d8eb470860afb4daaab676168f1a7248cd27ccd45bbcb0c700d4c6",
-      "commit": "715b7a1",
-      "commit_date": "2026-10-21T18:30:29+00:00"
+      "pdf_bytes": 1782121,
+      "pdf_sha256": "052f96f7f9bd7b0d42b080bf12cfbd926d30d6235449d27847a7c8650830334c",
+      "commit": "44da813",
+      "commit_date": "2026-10-24T00:40:21+00:00"
     },
     {
       "number": "002",
@@ -27,10 +27,10 @@
       "version": "2026-10-23",
       "summary": "Marjum 2026-07 images, camera poses and positions: antenna and transmitter positions and bounds, the joint MCMC, azimuth zero and the LIDAR check",
       "pdf": "/living/memo-002.pdf",
-      "pdf_bytes": 5471692,
-      "pdf_sha256": "80c03a796740dc1006848223013b2c721fe9cd0a97f59e3362f536ffb88959d5",
-      "commit": "7d5f192",
-      "commit_date": "2026-10-23T18:46:00+00:00"
+      "pdf_bytes": 5880720,
+      "pdf_sha256": "65d66996c75d970407a5affcd803b26684a10f7e80b3ac3d1fd2c94f59f1dd66",
+      "commit": "b3c2516",
+      "commit_date": "2026-10-24T00:38:50+00:00"
     },
     {
       "number": "003",
@@ -114,13 +114,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-22",
+      "version": "2026-10-23",
       "summary": "Marjum 2026-07 image-domain modeling: the sky/ground/offset/Sun model and its degeneracies, the night fit on tcal v0003 (ground temperature not yet measurable, sky amplitude ~2), when the Sun clears the terrain, solar radio bursts in box-air matched to e-CALLISTO, the raw data at every terrain sunrise and sunset, a calibrated 07-17 excess larger than the concurrent Sun, sky and ground recovery from the rotating antenna, and what the DEM's southern edge does to the horizon (DEM v0004)",
       "pdf": "/living/memo-008.pdf",
-      "pdf_bytes": 1743545,
-      "pdf_sha256": "827784b4abc23e04ef5cb8e65c338563ab64ab51713705c46faed64627810f28",
-      "commit": "2ec7a50",
-      "commit_date": "2026-10-23T18:49:27+00:00"
+      "pdf_bytes": 1744704,
+      "pdf_sha256": "6381479561537b256953cd0cd433389382ab6e8fd8e08120ade410a63cf71c5a",
+      "commit": "e39d02f",
+      "commit_date": "2026-10-25T05:36:49+00:00"
     }
   ]
 }
