@@ -1,6 +1,6 @@
 {
-  "source_ref": "6a293bc6092ef951a57c16679cd86585cc885978",
-  "source_commit": "6a293bc",
+  "source_ref": "849c9b4b95d6b93aa0e8c42865b3249c5a4305d7",
+  "source_commit": "849c9b4",
   "memos": [
     {
       "number": "001",
@@ -24,13 +24,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-23",
+      "version": "2026-10-26",
       "summary": "Marjum 2026-07 images, camera poses and positions: antenna and transmitter positions and bounds, the joint MCMC, azimuth zero and the LIDAR check",
       "pdf": "/living/memo-002.pdf",
-      "pdf_bytes": 5880720,
-      "pdf_sha256": "65d66996c75d970407a5affcd803b26684a10f7e80b3ac3d1fd2c94f59f1dd66",
-      "commit": "b3c2516",
-      "commit_date": "2026-10-24T00:38:50+00:00"
+      "pdf_bytes": 7914213,
+      "pdf_sha256": "aa47b5e454a47e66fc31d7281f21676676a7cf2ce72178d46a0aee8d1431962c",
+      "commit": "849c9b4",
+      "commit_date": "2026-10-26T20:00:25+00:00"
     },
     {
       "number": "003",
