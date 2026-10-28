@@ -1,6 +1,6 @@
 {
-  "source_ref": "38bf410069fe8d332bf4a427e0f3c02d789b2a85",
-  "source_commit": "38bf410",
+  "source_ref": "e1edb4d4aca35e9066c4a837efe1d3f5e1815040",
+  "source_commit": "e1edb4d",
   "memos": [
     {
       "number": "001",
@@ -24,13 +24,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-27",
+      "version": "2026-10-28",
       "summary": "Marjum 2026-07 images, camera poses and positions: antenna and transmitter positions and bounds, the joint MCMC, azimuth zero and the LIDAR check",
       "pdf": "/living/memo-002.pdf",
-      "pdf_bytes": 8402597,
-      "pdf_sha256": "01fa32dba04689bcd49a807d29db022e01b2844527459cc7b71fd339463e307a",
-      "commit": "38bf410",
-      "commit_date": "2026-10-28T15:35:28+00:00"
+      "pdf_bytes": 8029287,
+      "pdf_sha256": "b3154d926d44262a6960f5db055db7d9bfa976edbeb49d29265276ed797732f2",
+      "commit": "fc518bd",
+      "commit_date": "2026-10-28T16:29:05+00:00"
     },
     {
       "number": "003",
@@ -39,13 +39,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-25",
+      "version": "2026-10-28",
       "summary": "Marjum 2026-07 pointing: the roll mount and angle conventions, how the pointing table combines its sensors, the 07-17 raster, the potentiometer slip, the table's azimuth zero, elevation zero and failure, LIDAR-code fixes, table defects",
       "pdf": "/living/memo-003.pdf",
-      "pdf_bytes": 759908,
-      "pdf_sha256": "fcc265838f52d47f0c8b617aabbb6a2d7ec0f6a82538203feca26b5284d02c17",
-      "commit": "d7b2740",
-      "commit_date": "2026-10-27T06:25:44+00:00"
+      "pdf_bytes": 1108713,
+      "pdf_sha256": "cac74e110f7a1f3a117d8351e1674c3f05aadddb2e9d41f8c5c62dc8e5b7dcaa",
+      "commit": "e1edb4d",
+      "commit_date": "2026-10-28T17:37:51+00:00"
     },
     {
       "number": "004",
