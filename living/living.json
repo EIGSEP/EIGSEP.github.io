@@ -1,6 +1,6 @@
 {
-  "source_ref": "e1edb4d4aca35e9066c4a837efe1d3f5e1815040",
-  "source_commit": "e1edb4d",
+  "source_ref": "839a1ae4675d66e0eb51ebddfafbfdeed8c96f14",
+  "source_commit": "839a1ae",
   "memos": [
     {
       "number": "001",
@@ -42,10 +42,10 @@
       "version": "2026-10-28",
       "summary": "Marjum 2026-07 pointing: the roll mount and angle conventions, how the pointing table combines its sensors, the 07-17 raster, the potentiometer slip, the table's azimuth zero, elevation zero and failure, LIDAR-code fixes, table defects",
       "pdf": "/living/memo-003.pdf",
-      "pdf_bytes": 1108713,
-      "pdf_sha256": "cac74e110f7a1f3a117d8351e1674c3f05aadddb2e9d41f8c5c62dc8e5b7dcaa",
-      "commit": "e1edb4d",
-      "commit_date": "2026-10-28T17:37:51+00:00"
+      "pdf_bytes": 1108718,
+      "pdf_sha256": "284b78e62f0a78ee25d8e849bf37ae41a106534a8a15714024789f980484207d",
+      "commit": "839a1ae",
+      "commit_date": "2026-10-31T15:01:28+00:00"
     },
     {
       "number": "004",
@@ -69,13 +69,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-08",
+      "version": "2026-10-31",
       "summary": "Marjum 2026-07 beam reconstruction from the transmitter raster: tooth selection and background, the empirical beam model, geometry and handedness check, held-out scores against HFSS, noise floor",
       "pdf": "/living/memo-005.pdf",
-      "pdf_bytes": 10862809,
-      "pdf_sha256": "9032e1957eca2b830a9e05d05044848cda08e62eb0165c1f840a87e85e7bf95e",
-      "commit": "23c1faa",
-      "commit_date": "2026-10-08T21:40:24+00:00"
+      "pdf_bytes": 10571875,
+      "pdf_sha256": "4e73ab9a98267d8188fb12bcb94fcf022d56c3b9e260755a59e51e14c1275274",
+      "commit": "6c92989",
+      "commit_date": "2026-10-31T14:59:00+00:00"
     },
     {
       "number": "006",
