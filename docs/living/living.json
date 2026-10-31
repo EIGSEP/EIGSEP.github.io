@@ -1,6 +1,6 @@
 {
-  "source_ref": "f1ebc357be74c4dd025a888aff30a32044790187",
-  "source_commit": "f1ebc35",
+  "source_ref": "4486083a6fb024d7a6c9db7bbf3875aaace8061d",
+  "source_commit": "4486083",
   "memos": [
     {
       "number": "001",
@@ -102,10 +102,10 @@
       "version": "2026-10-04",
       "summary": "Marjum 2026-07 self-EMI tests: the four test sessions of 07-14/15 step by step, the screenshot clock (PDT), the phase-B input mapping, per-step spectra and changes, the Panda's imprint",
       "pdf": "/living/memo-007.pdf",
-      "pdf_bytes": 8240814,
-      "pdf_sha256": "8c4e8f9b3feafd2172445cda3089fba7e8631ced34c0fa6aa60a93dce4c2a018",
-      "commit": "a875fea",
-      "commit_date": "2026-10-05T20:24:47+00:00"
+      "pdf_bytes": 8122252,
+      "pdf_sha256": "5d4ef8861799698eb11ccc96830855b66cf7c3bfec5bd3ba78451c309178fa67",
+      "commit": "4486083",
+      "commit_date": "2026-10-31T15:33:33+00:00"
     },
     {
       "number": "008",
