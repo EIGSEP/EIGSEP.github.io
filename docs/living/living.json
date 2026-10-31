@@ -1,6 +1,6 @@
 {
-  "source_ref": "839a1ae4675d66e0eb51ebddfafbfdeed8c96f14",
-  "source_commit": "839a1ae",
+  "source_ref": "f1ebc357be74c4dd025a888aff30a32044790187",
+  "source_commit": "f1ebc35",
   "memos": [
     {
       "number": "001",
@@ -72,10 +72,10 @@
       "version": "2026-10-31",
       "summary": "Marjum 2026-07 beam reconstruction from the transmitter raster: tooth selection and background, the empirical beam model, geometry and handedness check, held-out scores against HFSS, noise floor",
       "pdf": "/living/memo-005.pdf",
-      "pdf_bytes": 10571875,
-      "pdf_sha256": "4e73ab9a98267d8188fb12bcb94fcf022d56c3b9e260755a59e51e14c1275274",
-      "commit": "6c92989",
-      "commit_date": "2026-10-31T14:59:00+00:00"
+      "pdf_bytes": 10571525,
+      "pdf_sha256": "01538596f74ae6ae7bd916b8f8a6f05d8d16bbbcde8e5a105bdb0c5f4741a7cd",
+      "commit": "f1ebc35",
+      "commit_date": "2026-10-31T15:21:57+00:00"
     },
     {
       "number": "006",
