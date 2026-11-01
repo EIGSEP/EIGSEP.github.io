@@ -177,8 +177,9 @@ overlap. Nothing else from HFSS enters. Unsampled pixels are grey; most of the s
 raster's tracks.
 
 \textit{Coverage.} The auto-correlation power method on the same integrations covers 3645 pixels at 199.2\,MHz
-and 5290 at 222.7\,MHz, against 3644 and 3611 with valid cross data. Above $\sim$210\,MHz the cross-tone flags
-remove more integrations than the auto flags. At 175.8\,MHz the auto is chronically contaminated by RFI and
+and 5290 at 222.7\,MHz, against 3317 and 3518 with valid cross data after the bracketed-fill rule, of which the
+solve keeps 3284 and 3460. The bracketed-fill rule and the cross-tone flags remove more integrations than the
+auto flags, most of all above $\sim$210\,MHz. At 175.8\,MHz the auto is chronically contaminated by RFI and
 covers only 46 pixels, while the cross is clean.
 
 \begin{figure*}[t]
@@ -390,10 +391,13 @@ self-calibration is therefore not used; its block phases serve below only as a d
 
 \appendix
 \section{Reproducing this memo} \label{app:repro}
-Code: \texttt{eigsep\_data.beam\_mapping.vector\_beam} (EIGSEP/eigsep\_data main) and the Phase 2 driver in
-EIGSEP/data-analysis \texttt{notebooks/dominic/vector\_beam/}. Inputs: the raw files
-\texttt{deployment5\_filtered/corr\_20260717\_*.h5}; pointing table v3 with the azimuth negated as in v5; HFSS
-\texttt{bowtie\_beam.npz}. The memo's driver scripts (\texttt{compute\_beams.py}, \texttt{make\_products.py},
-\texttt{dwell\_repeatability.py}, \texttt{count\_auto\_pixels.py}) are not yet in a repository.
+Code: \texttt{eigsep\_data.beam\_mapping.vector\_beam} (EIGSEP/eigsep\_data main); the mount uses the
+package's \texttt{TxGeometryModel} with \texttt{axle\_tilt\_deg} and \texttt{AZ\_SENSE}. Inputs: the raw files
+\texttt{deployment5\_filtered/corr\_20260717\_*.h5}; pointing table v3 with the azimuth multiplied by
+\texttt{AZ\_SENSE} as in v5; HFSS \texttt{bowtie\_beam.npz}. The driver scripts are in EIGSEP/data-analysis
+\texttt{notebooks/dominic/vector\_beam/memo\_efield/}: \texttt{compute\_beams.py} (scores and maps),
+\texttt{dwell\_repeatability.py}, \texttt{count\_auto\_pixels.py} and \texttt{make\_figures.py}, which writes
+every figure and \texttt{values.tex}. The tilt scan, error budget and phase-jump analyses are in its
+\texttt{supporting/} directory, as run under the right-handed convention.
 
 \end{document}
