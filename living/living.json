@@ -1,6 +1,6 @@
 {
-  "source_ref": "4486083a6fb024d7a6c9db7bbf3875aaace8061d",
-  "source_commit": "4486083",
+  "source_ref": "f26d7e6128cee018335f4e7e8dbb96b42a7a7b83",
+  "source_commit": "f26d7e6",
   "memos": [
     {
       "number": "001",
@@ -27,10 +27,10 @@
       "version": "2026-10-28",
       "summary": "Marjum 2026-07 images, camera poses and positions: antenna and transmitter positions and bounds, the joint MCMC, azimuth zero and the LIDAR check",
       "pdf": "/living/memo-002.pdf",
-      "pdf_bytes": 8029287,
-      "pdf_sha256": "b3154d926d44262a6960f5db055db7d9bfa976edbeb49d29265276ed797732f2",
-      "commit": "fc518bd",
-      "commit_date": "2026-10-28T16:29:05+00:00"
+      "pdf_bytes": 8053803,
+      "pdf_sha256": "3ecd113bfe5bf7242a95b4520315ff5619c49c1edbd4b2de7c51ecfa9f184dc6",
+      "commit": "85d780a",
+      "commit_date": "2026-11-04T21:03:01-08:00"
     },
     {
       "number": "003",
@@ -39,13 +39,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-28",
+      "version": "2026-11-06",
       "summary": "Marjum 2026-07 pointing: the roll mount and angle conventions, how the pointing table combines its sensors, the 07-17 raster, the potentiometer slip, the table's azimuth zero, elevation zero and failure, LIDAR-code fixes, table defects",
       "pdf": "/living/memo-003.pdf",
-      "pdf_bytes": 1108718,
-      "pdf_sha256": "284b78e62f0a78ee25d8e849bf37ae41a106534a8a15714024789f980484207d",
-      "commit": "839a1ae",
-      "commit_date": "2026-10-31T15:01:28+00:00"
+      "pdf_bytes": 1386187,
+      "pdf_sha256": "53d425a6469575794fff449107a788c885233deb2721845ce0bdff2fcf25ca34",
+      "commit": "ee51245",
+      "commit_date": "2026-11-06T16:08:04-08:00"
     },
     {
       "number": "004",
@@ -69,13 +69,13 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-31",
+      "version": "2026-11-09",
       "summary": "Marjum 2026-07 beam reconstruction from the transmitter raster: tooth selection and background, the empirical beam model, geometry and handedness check, held-out scores against HFSS, noise floor",
       "pdf": "/living/memo-005.pdf",
-      "pdf_bytes": 10571525,
-      "pdf_sha256": "01538596f74ae6ae7bd916b8f8a6f05d8d16bbbcde8e5a105bdb0c5f4741a7cd",
-      "commit": "f1ebc35",
-      "commit_date": "2026-10-31T15:21:57+00:00"
+      "pdf_bytes": 10409794,
+      "pdf_sha256": "3616dd8c302e52656df693239042fe526ee5c98d0c0db56b0b7f1dafe099382d",
+      "commit": "fe9da4d",
+      "commit_date": "2026-11-10T12:56:45-08:00"
     },
     {
       "number": "006",
@@ -114,13 +114,28 @@
       "authors": [
         "EIGSEP Team"
       ],
-      "version": "2026-10-23",
+      "version": "2026-11-06",
       "summary": "Marjum 2026-07 image-domain modeling: the sky/ground/offset/Sun model and its degeneracies, the night fit on tcal v0003 (ground temperature not yet measurable, sky amplitude ~2), when the Sun clears the terrain, solar radio bursts in box-air matched to e-CALLISTO, the raw data at every terrain sunrise and sunset, a calibrated 07-17 excess larger than the concurrent Sun, sky and ground recovery from the rotating antenna, and what the DEM's southern edge does to the horizon (DEM v0004)",
       "pdf": "/living/memo-008.pdf",
-      "pdf_bytes": 1744704,
-      "pdf_sha256": "6381479561537b256953cd0cd433389382ab6e8fd8e08120ade410a63cf71c5a",
-      "commit": "e39d02f",
-      "commit_date": "2026-10-25T05:36:49+00:00"
+      "pdf_bytes": 2341188,
+      "pdf_sha256": "e8f99d546cdf98cbc79a7b44ace5cea02b124aca9c8e00fe3431838409aef7e9",
+      "commit": "cc88864",
+      "commit_date": "2026-11-06T16:08:12-08:00"
+    },
+    {
+      "number": "009",
+      "slug": "memo-009-marjum-2026-07-degenerate-groups",
+      "title": "Marjum Pass 2026-07: what the night fit can and cannot separate",
+      "authors": [
+        "EIGSEP Team"
+      ],
+      "version": "2026-11-06",
+      "summary": "Marjum 2026-07: what the night fit can and cannot separate: the degenerate groups of the 07-17 night fit as posteriors (\u03b8 against P, the kelvin scale against the antenna-side gain, the ground temperature against the additive remainder), the bench kelvin scale in tension with the datasheet loss prior, the in-situ loss check, the receiver's noise waves as an unresolved systematic in P, and what D6 must change",
+      "pdf": "/living/memo-009.pdf",
+      "pdf_bytes": 918177,
+      "pdf_sha256": "b5f6167e95c4cee27a44d0e361f991f7089eccb9fd4d07c04ef14fc0b5fb2be2",
+      "commit": "6bdc5c8",
+      "commit_date": "2026-11-06T07:58:39-08:00"
     }
   ]
 }
